@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -13,8 +13,10 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
-  button {
+  button, input {
     border: none;
+    outline: none;
+    background-color: unset;
   }
 
   body {
@@ -25,4 +27,10 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 16px;
     font-family: 'Cabin', sans-serif;
   }
+`;
+
+export const LayoutWrapper = styled.div`
+  display: flex;
+  margin: 1rem 1rem 0rem 1rem;
+  gap: 3.5rem;
 `;

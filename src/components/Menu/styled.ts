@@ -2,24 +2,24 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  padding: 0.7rem;
+  padding: 0.8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 60px;
+  min-width: 62px;
+  width: 62px;
   height: calc(100svh - 2rem);
   position: sticky;
-  top: 1rem;
-  left: 1rem;
+  top: 0;
   border-radius: 0.5rem;
 
   a {
     display: block;
     width: 100%;
-    padding: 0.4rem;
+    padding: 0.412rem;
     transition:
-      background-color 0.2s,
-      color 0.1s ease;
+      background-color 0.2s ease-out,
+      color 0.05s;
 
     &.in {
       ${({ theme }) => css`
