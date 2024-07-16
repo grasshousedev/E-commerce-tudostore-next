@@ -30,7 +30,14 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="pt-BR">
-        <Head />
+        <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
