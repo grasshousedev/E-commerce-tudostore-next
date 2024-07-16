@@ -6,8 +6,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 62px;
-  width: 62px;
+  min-width: 65.6406px;
+  width: 65.6406px;
   height: calc(100svh - 2rem);
   position: sticky;
   top: 0;
