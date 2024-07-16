@@ -13,6 +13,10 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
+  button {
+    border: none;
+  }
+
   body {
     background-color: ${({ theme }) => theme.colors.background};
   }
