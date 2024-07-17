@@ -10,11 +10,13 @@ export const Container = styled.div`
   width: 65.6406px;
   height: calc(100svh - 2rem);
   position: sticky;
-  top: 0;
+  top: 1rem;
   border-radius: 0.5rem;
 
   a {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 0.412rem;
     transition:
@@ -31,8 +33,8 @@ export const Container = styled.div`
 
     svg,
     img {
-      width: 100%;
-      height: 100%;
+      width: 27px;
+      height: 27px;
     }
 
     img {

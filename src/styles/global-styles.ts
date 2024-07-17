@@ -19,6 +19,10 @@ export const GlobalStyles = createGlobalStyle`
     background-color: unset;
   }
 
+  button {
+    cursor: pointer;
+  }
+
   body {
     background-color: ${({ theme }) => theme.colors.background};
   }

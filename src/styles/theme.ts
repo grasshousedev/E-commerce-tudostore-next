@@ -12,6 +12,7 @@ export const theme: DefaultTheme = {
     secondary: '#60695C',
     placeholder: '#1A1F16',
     white: '#FFFFFF',
+    dark: '#1A1F16',
     warnColors: {
       danger: '#E5252C',
       warning: '#E6D117',

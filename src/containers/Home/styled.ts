@@ -10,6 +10,36 @@ export const SearchBar = styled.div`
   margin-inline: auto;
   display: flex;
   flex-direction: column;
+  padding: 0.5rem;
+  position: sticky;
+  top: 1rem;
+
+  &.off {
+    align-items: center;
+
+    span.info-search {
+      display: none;
+    }
+
+    input {
+      animation: decreaseSize 0.15s ease forwards;
+      margin-top: 0;
+      cursor: pointer;
+    }
+  }
+
+  &.focused {
+    align-items: flex-start;
+
+    span.info-search {
+      display: inline;
+    }
+
+    input {
+      animation: unset;
+      margin-top: 0.5rem;
+    }
+  }
 
   span.info-search {
     ${({ theme }) => css`
@@ -20,7 +50,7 @@ export const SearchBar = styled.div`
   }
 
   input {
-    height: 52px;
+    height: 49px;
     border-radius: 0.75rem;
     padding-inline: 1.4rem;
     width: 100%;
@@ -31,6 +61,30 @@ export const SearchBar = styled.div`
     `}
     &::placeholder {
       color: ${({ theme }) => theme.colors.placeholder}80;
+    }
+    box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
+    transition: margin-top 0.2s;
+  }
+
+  .input-search-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @keyframes decreaseSize {
+    100% {
+      height: 50px;
+      width: 50px;
     }
   }
 `;
