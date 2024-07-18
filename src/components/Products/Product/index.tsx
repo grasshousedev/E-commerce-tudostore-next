@@ -12,7 +12,7 @@ export default function Product({ thumbnail, title, brand, price }: ProductProps
   return (
     <Container>
       <ContainerImg className="container-img">
-        <img src={thumbnail} alt={title} />
+        <img src={thumbnail} alt={title} loading="lazy" width="200" height="200" />
       </ContainerImg>
       <ContainerInfo>
         <div className="product-info">
