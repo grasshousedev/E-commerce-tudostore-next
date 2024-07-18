@@ -6,6 +6,7 @@ import { paginationLimits } from '../../config/limits';
 
 import { getAllProducts } from '../../data/products/getAll';
 
+import LoadingMoreProducts from '../../components/LoadingMoreProducts';
 import Products from '../../components/Products';
 
 import { ProductsProtocol } from '../../domain/products/products-protocol';
@@ -97,6 +98,7 @@ export default function Home({ products }: HomePageProps) {
         )}
       </SearchBar>
       <Products products={productsData} />
+      {isLoadingMoreProducts && <LoadingMoreProducts />}
     </Container>
   );
 }
