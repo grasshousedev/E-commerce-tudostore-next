@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 
 import { IoSearch } from 'react-icons/io5';
 
+import { paginationLimits } from '../../config/limits';
+
+import { getAllProducts } from '../../data/products/getAll';
+
 import Products from '../../components/Products';
 
 import { ProductsProtocol } from '../../domain/products/products-protocol';
@@ -15,13 +19,57 @@ export type HomePageProps = {
 export default function Home({ products }: HomePageProps) {
   const [inputFocused, setInputFocused] = useState(false);
   const [userScrolled, setUserScrolled] = useState(false);
+  const [productsData, setProductsData] = useState(products);
+  const [page, setPage] = useState(1);
+  const [isLoadingMoreProducts, setIsLoadingMoreProducts] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY === 0) {
+      setUserScrolled(false);
+      return;
+    }
+    if (userScrolled) return;
+    setUserScrolled(true);
+  };
+
+  const loadMoreProducts = async () => {
+    setIsLoadingMoreProducts(true);
+    const moreProducts = await getAllProducts(
+      `skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
+    );
+    const newObjProducts = {
+      products: [...productsData.products, ...moreProducts.products],
+      total: moreProducts.total,
+      skip: moreProducts.skip,
+      limit: moreProducts.limit,
+    };
+    setProductsData(newObjProducts);
+    setPage(page + 1);
+    setIsLoadingMoreProducts(false);
+  };
+
+  const handleScrollLoadMore = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoadingMoreProducts) {
+      loadMoreProducts();
+    }
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (userScrolled) return;
-      setUserScrolled(true);
-    });
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  useEffect(() => {
+    if (productsData.products.length >= productsData.total) return;
+    window.addEventListener('scroll', handleScrollLoadMore);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollLoadMore);
+    };
+  }, [page]);
 
   const handleActiveInputSearch = () => {
     setInputFocused(true);
@@ -48,7 +96,7 @@ export default function Home({ products }: HomePageProps) {
           </label>
         )}
       </SearchBar>
-      <Products products={products} />
+      <Products products={productsData} />
     </Container>
   );
 }

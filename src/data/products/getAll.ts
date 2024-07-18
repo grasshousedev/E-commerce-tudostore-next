@@ -1,6 +1,8 @@
 import { baseURL } from '../../services/axios';
 
-export const getAllProducts = async (query?: string) => {
+import { ProductsProtocol } from '../../domain/products/products-protocol';
+
+export const getAllProducts = async (query?: string): Promise<ProductsProtocol> => {
   const response = await baseURL.get(`${query ? `?${query}` : ''}`);
   return response.data;
 };

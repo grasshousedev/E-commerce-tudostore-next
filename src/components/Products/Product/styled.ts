@@ -13,6 +13,7 @@ export const ContainerImg = styled.div`
   height: 232px;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 1.375rem;
+  overflow: hidden;
 
   img {
     width: 100%;

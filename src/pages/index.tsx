@@ -1,8 +1,10 @@
 import { GetStaticProps } from 'next';
 
-import HomePage from '../containers/Home';
+import { paginationLimits } from '../config/limits';
 
 import { getAllProducts } from '../data/products/getAll';
+
+import HomePage from '../containers/Home';
 
 import { ProductsProtocol } from '../domain/products/products-protocol';
 
@@ -15,7 +17,7 @@ export default function Home({ products }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await getAllProducts();
+  const products = await getAllProducts(`limit=${paginationLimits.homeProducts}`);
 
   return {
     props: {
