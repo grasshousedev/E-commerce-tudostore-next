@@ -38,7 +38,7 @@ export default function Home({ products }: HomePageProps) {
         <input
           id="input-search"
           type="text"
-          placeholder={`${inputFocused ? 'Camiseta, Blusas, Moleton, Notebooks, Celulares, ...' : ''}`}
+          placeholder={`${inputFocused || !userScrolled ? 'Camiseta, Blusas, Moleton, Notebooks, Celulares, ...' : ''}`}
           onFocus={handleActiveInputSearch}
           onBlur={handleDeactivateInputSearch}
         />
