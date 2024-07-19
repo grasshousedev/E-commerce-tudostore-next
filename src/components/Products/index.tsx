@@ -14,6 +14,7 @@ export default function Products({ products }: ProductsProps) {
       {products.products.map((product) => (
         <Product
           key={product.id}
+          id={product.id}
           thumbnail={product.thumbnail}
           title={product.title}
           brand={product.brand}

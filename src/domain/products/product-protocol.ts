@@ -24,6 +24,7 @@ export interface ProductProtocol {
 }
 
 export interface ProductMinimalProtocol {
+  id: number;
   thumbnail: string;
   title: string;
   brand: string;
