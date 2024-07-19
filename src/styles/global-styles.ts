@@ -37,4 +37,8 @@ export const LayoutWrapper = styled.div`
   display: flex;
   margin: 1rem 1rem 0rem 1rem;
   gap: 3.5rem;
+
+  & > section  {
+    width: 100%;
+  }
 `;

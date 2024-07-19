@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { css } from 'styled-components';
 
-export const Container = styled.section`
-  width: 100%;
-`;
+export const Container = styled.section``;
 
 export const SearchBar = styled.div`
   width: clamp(200px, 50%, 500px);
