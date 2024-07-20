@@ -67,7 +67,7 @@ export const ContainerGallery = styled.div`
   }
 
   .main-img {
-    height: 50vh;
+    height: 60vh;
     width: 100%;
     grid-column: 2;
     background-color: ${({ theme }) => theme.colors.white};
