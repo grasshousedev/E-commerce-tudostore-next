@@ -17,6 +17,11 @@ export const Container = styled.button`
     &:hover {
       background-color: ${theme.colors.placeholder}E0;
     }
+
+    &:active {
+      transition: background-color 0.07s ease-out;
+      background-color: ${theme.colors.placeholder}C0;
+    }
   `}
 
   svg {
