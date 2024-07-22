@@ -28,6 +28,14 @@ export const ContainerTop = styled.section`
   grid-template-columns: 0.38fr 0.62fr;
   gap: 2rem;
   margin-top: 1.5rem;
+
+  @media screen and (max-width: 1370px) {
+    grid-template-columns: repeat(2, 0.5fr);
+  }
+
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const ContainerGallery = styled.div`
@@ -35,7 +43,20 @@ export const ContainerGallery = styled.div`
   grid-template-columns: 55px 1fr;
   gap: 1rem;
 
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 55px;
+  }
+
   .gallery {
+    @media screen and (max-width: 1000px) {
+      grid-row: 2;
+
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     .input-radio {
       display: none;
     }
@@ -63,10 +84,15 @@ export const ContainerGallery = styled.div`
 
     .label-option ~ .label-option {
       margin-top: 1rem;
+
+      @media screen and (max-width: 1000px) {
+        margin-top: unset;
+      }
     }
   }
 
   .main-img {
+    min-height: 300px;
     height: 60vh;
     width: 100%;
     grid-column: 2;
@@ -76,6 +102,10 @@ export const ContainerGallery = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 1000px) {
+      grid-column: 1;
+    }
 
     img {
       width: 100%;
@@ -152,6 +182,7 @@ export const ContainerMainInfos = styled.div`
 
     .description {
       padding: 0.5rem;
+      margin-bottom: 1rem;
       ${({ theme }) => css`
         font-size: ${theme.fontSizes.l6};
         color: ${theme.colors.dark};
