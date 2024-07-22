@@ -38,7 +38,7 @@ export const LayoutWrapper = styled.div`
   margin: 1rem 1rem 0rem 1rem;
   gap: 3.5rem;
 
-  & > section  {
+  & > *:nth-child(2) {
     width: 100%;
   }
 `;
