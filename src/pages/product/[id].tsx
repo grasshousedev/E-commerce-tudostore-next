@@ -6,6 +6,7 @@ import { getOneProduct } from '../../data/products/getOne';
 import ProductPage from '../../containers/Product';
 
 import { ProductProtocol } from '../../domain/products/product-protocol';
+import { delay } from '../../../prodUtils/delayPageBuild';
 
 export type ProductProps = {
   product: ProductProtocol;
@@ -26,6 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params;
+  await delay(200);
 
   const product = await getOneProduct(String(id));
 
