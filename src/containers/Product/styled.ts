@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.section`
+export const Container = styled.div`
   margin-top: 3rem;
 
   a.back-link {
@@ -23,7 +23,7 @@ export const Container = styled.section`
   }
 `;
 
-export const ContainerTop = styled.div`
+export const ContainerTop = styled.section`
   display: grid;
   grid-template-columns: 0.38fr 0.62fr;
   gap: 2rem;
@@ -161,6 +161,77 @@ export const ContainerMainInfos = styled.div`
     & > button {
       align-self: flex-end;
       margin-top: auto;
+    }
+  }
+`;
+
+export const ContainerBottom = styled.section`
+  margin-top: 2.5rem;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: ${({ theme }) => theme.colors.placeholder}80;
+    margin-bottom: 2rem;
+    border-radius: 3rem;
+  }
+
+  h2 {
+    ${({ theme }) => css`
+      color: ${theme.colors.dark};
+      font-size: ${theme.fontSizes.l4};
+      font-weight: 500;
+    `}
+  }
+
+  .container-reviews {
+    margin-bottom: 3rem;
+    & > p {
+      margin-top: 1.5rem;
+
+      font-size: ${({ theme }) => theme.fontSizes.l5};
+      font-weight: 400;
+
+      & > .accent {
+        color: ${({ theme }) => theme.colors.accent['1']};
+        text-decoration: underline;
+      }
+    }
+
+    .container-items {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+
+      .review-item {
+        & > * + * {
+          margin-top: 0.25rem;
+        }
+
+        & > * + *.comment {
+          margin-top: 0.5rem;
+        }
+
+        .stars {
+          svg {
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+
+          svg + svg {
+            margin-left: 0.5rem;
+          }
+        }
+        .created-by-date {
+          ${({ theme }) => css`
+            font-size: ${theme.fontSizes.base};
+            color: ${theme.colors.secondary};
+          `}
+        }
+      }
     }
   }
 `;

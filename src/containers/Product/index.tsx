@@ -7,12 +7,13 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
 import { convertNumberDecimals } from '../../utils/convertNumberDecimals';
+import { convertDate } from '../../utils/convertReviewDate';
 
 import Button from '../../components/Button';
 
 import { ProductProtocol } from '../../domain/products/product-protocol';
 
-import { Container, ContainerTop, ContainerGallery, ContainerMainInfos } from './styled';
+import { Container, ContainerTop, ContainerGallery, ContainerMainInfos, ContainerBottom } from './styled';
 
 export type ProductPageProps = {
   product: ProductProtocol;
@@ -77,6 +78,27 @@ export default function Product({ product }: ProductPageProps) {
           </div>
         </ContainerMainInfos>
       </ContainerTop>
+      <ContainerBottom>
+        <h2>Avaliações</h2>
+        <div className="container-reviews">
+          <p>
+            Média de <span className="accent">{convertNumberDecimals(product.rating, 1)} de 5</span> com um
+            total de <span className="accent">{product.reviews.length}</span> avaliações
+          </p>
+          <div className="container-items">
+            {product.reviews.map((review, i) => (
+              <div key={i} className="review-item">
+                <div className="stars">{getRatingStars(review.rating)}</div>
+                <p className="created-by-date">
+                  <span className="review-date">{convertDate(review.date)}</span>
+                  <span className="author">{review.reviewerName}</span>
+                </p>
+                <p className="comment">{review.comment}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </ContainerBottom>
     </Container>
   );
 }
