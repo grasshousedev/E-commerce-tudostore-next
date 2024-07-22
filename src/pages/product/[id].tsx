@@ -6,7 +6,7 @@ import { getOneProduct } from '../../data/products/getOne';
 import ProductPage from '../../containers/Product';
 
 import { ProductProtocol } from '../../domain/products/product-protocol';
-import { delay } from '../../../prodUtils/delayPageBuild';
+import { delay } from '../../../buildUtils/delayPageBuild';
 
 export type ProductProps = {
   product: ProductProtocol;
