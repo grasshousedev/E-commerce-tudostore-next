@@ -71,6 +71,10 @@ export const ContainerGallery = styled.div`
       cursor: pointer;
       transition: background-color 0.2s ease-out;
 
+      @media screen and (max-width: 1000px) {
+        width: 55px;
+      }
+
       img {
         width: 100%;
         height: 100%;

@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { IoBagAdd } from 'react-icons/io5';
 import { IoIosArrowBack } from 'react-icons/io';
 
+import { useWaitImageLoad } from '../../hooks/waitImageLoad';
+
 import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
 import { convertNumberDecimals } from '../../utils/convertNumberDecimals';
@@ -21,6 +23,9 @@ export type ProductPageProps = {
 
 export default function Product({ product }: ProductPageProps) {
   const [selectedImg, setSelectedImg] = useState(product.images[0]);
+  const { imagesLoaded } = useWaitImageLoad(product.images);
+
+  console.log(imagesLoaded);
 
   const handleSelectImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedImg(e.target.value);
@@ -47,16 +52,16 @@ export default function Product({ product }: ProductPageProps) {
                   onChange={handleSelectImg}
                 />
                 <label
-                  className={`label-option ${selectedImg === img ? 'on' : ''}`}
+                  className={`label-option ${selectedImg === img ? 'on' : ''} ${!imagesLoaded ? 'load-animation' : ''}`}
                   htmlFor={`gallery-img-${i}`}
                 >
-                  <img src={img} alt={`Imagem do produto ${product.title}`} />
+                  {imagesLoaded && <img src={img} alt={`Imagem do produto ${product.title}`} />}
                 </label>
               </React.Fragment>
             ))}
           </div>
-          <div className="main-img">
-            <img src={selectedImg} alt={product.title} />
+          <div className={`main-img ${!imagesLoaded ? 'load-animation' : ''}`}>
+            {imagesLoaded && <img src={selectedImg} alt={product.title} />}
           </div>
         </ContainerGallery>
         <ContainerMainInfos>

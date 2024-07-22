@@ -41,4 +41,58 @@ export const LayoutWrapper = styled.div`
   & > *:nth-child(2) {
     width: 100%;
   }
+
+  .load-animation {
+    background: linear-gradient(
+      -220deg,
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05)
+    );
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 1s ease infinite;
+    -moz-animation: AnimationName 1s ease infinite;
+    animation: AnimationName 1s ease infinite;
+
+    @-webkit-keyframes AnimationName {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @-moz-keyframes AnimationName {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @keyframes AnimationName {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  }
 `;
