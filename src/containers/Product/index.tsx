@@ -25,8 +25,6 @@ export default function Product({ product }: ProductPageProps) {
   const [selectedImg, setSelectedImg] = useState(product.images[0]);
   const { imagesLoaded } = useWaitImageLoad(product.images);
 
-  console.log(imagesLoaded);
-
   const handleSelectImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedImg(e.target.value);
   };
