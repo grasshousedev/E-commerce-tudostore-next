@@ -45,21 +45,21 @@ export const LayoutWrapper = styled.div`
   .load-animation {
     background: linear-gradient(
       -220deg,
-      rgba(0, 0, 0, 0.05),
-      rgba(0, 0, 0, 0.05),
-      rgba(0, 0, 0, 0.05),
-      rgba(0, 0, 0, 0.05),
-      rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0.05),
-      rgba(0, 0, 0, 0.05),
-      rgba(0, 0, 0, 0.05),
-      rgba(0, 0, 0, 0.05)
+      #1a1f16cc,
+      rgba(0, 0, 0, 0.07),
+      rgba(0, 0, 0, 0.02),
+      rgba(0, 0, 0, 0.02),
+      #1a1f1633,
+      rgba(0, 0, 0, 0.02),
+      rgba(0, 0, 0, 0.02),
+      rgba(0, 0, 0, 0.07),
+      #1a1f16cc
     );
     background-size: 600% 600%;
 
-    -webkit-animation: AnimationName 1s ease infinite;
-    -moz-animation: AnimationName 1s ease infinite;
-    animation: AnimationName 1s ease infinite;
+    -webkit-animation: AnimationName 1.1s ease infinite;
+    -moz-animation: AnimationName 1.1s ease infinite;
+    animation: AnimationName 1.1s ease infinite;
 
     @-webkit-keyframes AnimationName {
       0% {
