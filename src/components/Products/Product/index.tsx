@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { IoBagAdd } from 'react-icons/io5';
 
@@ -19,7 +20,16 @@ export default function Product({ id, thumbnail, title, brand, price }: ProductP
     <Link href="/product/[id]" as={`/product/${id}`} passHref legacyBehavior>
       <Container>
         <ContainerImg className={`container-img ${!imagesLoaded ? 'load-animation' : ''}`}>
-          {imagesLoaded && <img src={thumbnail} alt={title} loading="lazy" width="200" height="200" />}
+          {imagesLoaded && (
+            <Image
+              src={thumbnail}
+              alt={title}
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          )}
         </ContainerImg>
         <ContainerInfo>
           <div className="product-info">

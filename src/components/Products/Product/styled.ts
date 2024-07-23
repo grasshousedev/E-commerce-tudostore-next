@@ -15,11 +15,11 @@ export const ContainerImg = styled.div`
   border-radius: 1.375rem;
   overflow: hidden;
 
-  img {
+  /* img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-  }
+  } */
 `;
 
 export const ContainerInfo = styled.div`

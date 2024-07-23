@@ -59,7 +59,10 @@ export default function Product({ product }: ProductPageProps) {
             ))}
           </div>
           <div className={`main-img ${!imagesLoaded ? 'load-animation' : ''}`}>
-            {imagesLoaded && <img src={selectedImg} alt={product.title} />}
+            {imagesLoaded &&
+              product.images.map(
+                (img, i) => img === selectedImg && <img key={i} src={img} alt={product.title} />,
+              )}
           </div>
         </ContainerGallery>
         <ContainerMainInfos>
