@@ -6,6 +6,8 @@ import { paginationLimits } from '../../config/limits';
 
 import { getAllProducts } from '../../data/products/getAll';
 
+import { useUserScrolled } from '../../hooks/userScrolled';
+
 import LoadingMoreProducts from '../../components/LoadingMoreProducts';
 import Products from '../../components/Products';
 
@@ -19,57 +21,42 @@ export type HomePageProps = {
 
 export default function Home({ products }: HomePageProps) {
   const [inputFocused, setInputFocused] = useState(false);
-  const [userScrolled, setUserScrolled] = useState(false);
+  const { userScrolled } = useUserScrolled();
   const [productsData, setProductsData] = useState(products);
   const [page, setPage] = useState(1);
   const [isLoadingMoreProducts, setIsLoadingMoreProducts] = useState(false);
 
-  const handleScroll = () => {
-    if (window.scrollY === 0) {
-      setUserScrolled(false);
-      return;
-    }
-    if (userScrolled) return;
-    setUserScrolled(true);
-  };
-
-  const loadMoreProducts = async () => {
-    setIsLoadingMoreProducts(true);
-    const moreProducts = await getAllProducts(
-      `skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
-    );
-    const newObjProducts = {
-      products: [...productsData.products, ...moreProducts.products],
-      total: moreProducts.total,
-      skip: moreProducts.skip,
-      limit: moreProducts.limit,
-    };
-    setProductsData(newObjProducts);
-    setPage(page + 1);
-    setIsLoadingMoreProducts(false);
-  };
-
-  const handleScrollLoadMore = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoadingMoreProducts) {
-      loadMoreProducts();
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    if (productsData.products.length >= productsData.total || isLoadingMoreProducts) return;
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+    const loadMoreProducts = async () => {
+      setIsLoadingMoreProducts(true);
+      const moreProducts = await getAllProducts(
+        `skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
+      );
+      const newObjProducts = {
+        products: [...productsData.products, ...moreProducts.products],
+        total: moreProducts.total,
+        skip: moreProducts.skip,
+        limit: moreProducts.limit,
+      };
+      setProductsData(newObjProducts);
+      setPage(page + 1);
+      setIsLoadingMoreProducts(false);
     };
-  }, []);
 
-  useEffect(() => {
-    if (productsData.products.length >= productsData.total) return;
+    const handleScrollLoadMore = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoadingMoreProducts) {
+        loadMoreProducts();
+      }
+    };
+
     window.addEventListener('scroll', handleScrollLoadMore);
 
     return () => {
       window.removeEventListener('scroll', handleScrollLoadMore);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const handleActiveInputSearch = () => {

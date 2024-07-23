@@ -5,6 +5,7 @@ import { IoBagAdd } from 'react-icons/io5';
 import { IoIosArrowBack } from 'react-icons/io';
 
 import { useWaitImageLoad } from '../../hooks/waitImageLoad';
+import { useUserScrolled } from '../../hooks/userScrolled';
 
 import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
@@ -23,6 +24,7 @@ export type ProductPageProps = {
 
 export default function Product({ product }: ProductPageProps) {
   const [selectedImg, setSelectedImg] = useState(product.images[0]);
+  const { userScrolled } = useUserScrolled();
   const { imagesLoaded } = useWaitImageLoad(product.images);
 
   const handleSelectImg = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +33,11 @@ export default function Product({ product }: ProductPageProps) {
 
   return (
     <Container>
-      <Link className="back-link" href="#" onClick={() => history.back()}>
+      <Link
+        className={`back-link ${userScrolled ? 'float-style' : ''}`}
+        href="#"
+        onClick={() => history.back()}
+      >
         <IoIosArrowBack />
         <span>Voltar</span>
       </Link>

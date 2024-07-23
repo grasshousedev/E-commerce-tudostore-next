@@ -7,10 +7,28 @@ export const Container = styled.div`
     display: flex;
     gap: 0.5rem;
     padding: 0.5rem;
+    position: sticky;
+    top: 1rem;
+    width: fit-content;
+    background: transparent;
+    transition:
+      background-color 0.15s ease-out,
+      color 0.1s ease-out;
+    box-shadow: 0 0 0 rgb(0, 0, 0);
+    border-radius: 0.875rem;
+
+    &.float-style {
+      ${({ theme }) => css`
+        background-color: ${theme.colors.white};
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+        padding: 0.5rem 1rem;
+      `};
+    }
 
     svg {
       width: 1.5rem;
       height: 1.5rem;
+      color: ${({ theme }) => theme.colors.dark};
     }
 
     span {
