@@ -1,7 +1,35 @@
 import styled from 'styled-components';
 import { css } from 'styled-components';
 
-export const Container = styled.section``;
+export const Container = styled.section`
+  button.btn-load-more {
+    display: block;
+    ${({ theme }) => css`
+      background-color: ${theme.colors.accent['1']};
+      font-size: ${theme.fontSizes.l6};
+      color: ${theme.colors.white};
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+      font-weight: 500;
+    `}
+    margin-block: 2rem;
+    margin-inline: auto;
+    border-radius: 0.875rem;
+    height: 50px;
+    padding-inline: 1.5rem;
+    transition: 0.15s background-color ease-out;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.accent['2']};
+    }
+
+    &:active {
+      transition: none;
+      color: transparent;
+      background-color: transparent;
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    }
+  }
+`;
 
 export const SearchBar = styled.div`
   width: clamp(200px, 50%, 500px);

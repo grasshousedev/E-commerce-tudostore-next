@@ -26,24 +26,24 @@ export default function Home({ products }: HomePageProps) {
   const [page, setPage] = useState(1);
   const [isLoadingMoreProducts, setIsLoadingMoreProducts] = useState(false);
 
+  const loadMoreProducts = async () => {
+    setIsLoadingMoreProducts(true);
+    const moreProducts = await getAllProducts(
+      `skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
+    );
+    const newObjProducts = {
+      products: [...productsData.products, ...moreProducts.products],
+      total: moreProducts.total,
+      skip: moreProducts.skip,
+      limit: moreProducts.limit,
+    };
+    setProductsData(newObjProducts);
+    setPage(page + 1);
+    setIsLoadingMoreProducts(false);
+  };
+
   useEffect(() => {
     if (productsData.products.length >= productsData.total || isLoadingMoreProducts) return;
-
-    const loadMoreProducts = async () => {
-      setIsLoadingMoreProducts(true);
-      const moreProducts = await getAllProducts(
-        `skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
-      );
-      const newObjProducts = {
-        products: [...productsData.products, ...moreProducts.products],
-        total: moreProducts.total,
-        skip: moreProducts.skip,
-        limit: moreProducts.limit,
-      };
-      setProductsData(newObjProducts);
-      setPage(page + 1);
-      setIsLoadingMoreProducts(false);
-    };
 
     const handleScrollLoadMore = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoadingMoreProducts) {
@@ -86,6 +86,11 @@ export default function Home({ products }: HomePageProps) {
       </SearchBar>
       <Products products={productsData} />
       {isLoadingMoreProducts && <LoadingMoreProducts />}
+      {!isLoadingMoreProducts && productsData.products.length < products.total && (
+        <button className="btn-load-more" type="button" onClick={loadMoreProducts}>
+          Carregar mais
+        </button>
+      )}
     </Container>
   );
 }
