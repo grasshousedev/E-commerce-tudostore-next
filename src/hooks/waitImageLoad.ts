@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const loadImg = (src) => {
+const loadImg = (src: string) => {
   return new Promise((resolve) => {
     const image = new Image();
     image.src = src;
