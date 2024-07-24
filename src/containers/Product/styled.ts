@@ -116,6 +116,7 @@ export const ContainerGallery = styled.div`
   .main-img {
     min-height: 300px;
     height: 60vh;
+    min-width: 300px;
     width: 100%;
     grid-column: 2;
     background-color: ${({ theme }) => theme.colors.white};
@@ -225,7 +226,7 @@ export const ContainerBottom = styled.section`
     content: '';
     display: block;
     width: 100%;
-    height: 3px;
+    height: 0.25rem;
     background-color: ${({ theme }) => theme.colors.placeholder}80;
     margin-bottom: 2rem;
     border-radius: 3rem;
