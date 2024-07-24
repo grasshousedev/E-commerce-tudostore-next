@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import { IoBagAdd } from 'react-icons/io5';
 
+import { setPushLSItem } from '../../../services/localStorage';
+
 import { convertToBRL } from '../../../utils/convertPriceBRL';
 
 import { ProductMinimalProtocol } from '../../../domain/products/product-protocol';
@@ -14,6 +16,11 @@ export type ProductProps = ProductMinimalProtocol;
 
 export default function Product({ id, thumbnail, title, brand, price }: ProductProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleAddToBag = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    e.preventDefault();
+    setPushLSItem('bag', id);
+  };
 
   return (
     <Link href="/product/[id]" as={`/product/${id}`} passHref legacyBehavior>
@@ -41,7 +48,7 @@ export default function Product({ id, thumbnail, title, brand, price }: ProductP
           </div>
           <div className="buy-info">
             <span className="price">{convertToBRL(price)}</span>
-            <button>
+            <button type="button" onClick={(e) => handleAddToBag(e, id)}>
               <IoBagAdd />
             </button>
           </div>
