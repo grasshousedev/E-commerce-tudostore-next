@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { IoBagAdd } from 'react-icons/io5';
 import { IoIosArrowBack } from 'react-icons/io';
 
-import { setPushLSItem } from '../../services/localStorage';
+import { useBagContext } from '../../contexts/bag';
 
 import { useWaitImageLoad } from '../../hooks/waitImageLoad';
 import { useUserScrolled } from '../../hooks/userScrolled';
@@ -26,6 +26,7 @@ export type ProductPageProps = {
 
 export default function Product({ product }: ProductPageProps) {
   const [selectedImg, setSelectedImg] = useState(product.images[0]);
+  const { bagItems, setBagItems } = useBagContext();
   const { userScrolled } = useUserScrolled();
   const { imagesLoaded } = useWaitImageLoad(product.images);
 
@@ -34,7 +35,7 @@ export default function Product({ product }: ProductPageProps) {
   };
 
   const handleAddToBag = (id: number) => {
-    setPushLSItem('bag', id);
+    setBagItems([...bagItems, id]);
   };
 
   return (

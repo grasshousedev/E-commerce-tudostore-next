@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { IoBagAdd } from 'react-icons/io5';
 
-import { setPushLSItem } from '../../../services/localStorage';
+import { useBagContext } from '../../../contexts/bag';
 
 import { convertToBRL } from '../../../utils/convertPriceBRL';
 
@@ -16,10 +16,11 @@ export type ProductProps = ProductMinimalProtocol;
 
 export default function Product({ id, thumbnail, title, brand, price }: ProductProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { bagItems, setBagItems } = useBagContext();
 
   const handleAddToBag = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.preventDefault();
-    setPushLSItem('bag', id);
+    setBagItems([...bagItems, id]);
   };
 
   return (
