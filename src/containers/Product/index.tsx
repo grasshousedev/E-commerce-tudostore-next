@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { IoBagAdd } from 'react-icons/io5';
 import { IoIosArrowBack } from 'react-icons/io';
 
+import { setPushLSItem } from '../../services/localStorage';
+
 import { useWaitImageLoad } from '../../hooks/waitImageLoad';
 import { useUserScrolled } from '../../hooks/userScrolled';
 
@@ -29,6 +31,10 @@ export default function Product({ product }: ProductPageProps) {
 
   const handleSelectImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedImg(e.target.value);
+  };
+
+  const handleAddToBag = (id: number) => {
+    setPushLSItem('bag', id);
   };
 
   return (
@@ -83,7 +89,7 @@ export default function Product({ product }: ProductPageProps) {
             </span>
             <span className="price">{convertToBRL(product.price)}</span>
             <p className="description">{product.description}</p>
-            <Button>
+            <Button onClick={() => handleAddToBag(product.id)}>
               <IoBagAdd />
               <span>Adicionar ao carrinho</span>
             </Button>
