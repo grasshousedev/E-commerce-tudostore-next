@@ -1,5 +1,9 @@
 export const getLSItem = (itemName: string) => {
-  return JSON.parse(localStorage.getItem(itemName));
+  try {
+    return JSON.parse(localStorage.getItem(itemName));
+  } catch (error) {
+    return null;
+  }
 };
 
 export const setLSItem = <T>(itemName: string, items: T | T[]) => {

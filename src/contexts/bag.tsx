@@ -2,9 +2,16 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 import { getLSItem, setLSItem } from '../services/localStorage';
 
-type ContextType = {
-  bagItems: number[];
-  setBagItems: React.Dispatch<React.SetStateAction<number[]>>;
+export type BagItemProtocol = {
+  id: number;
+  title: string;
+  repeat: number;
+  thumbnail: string;
+};
+
+export type ContextType = {
+  bagItems: BagItemProtocol[];
+  setBagItems: React.Dispatch<React.SetStateAction<BagItemProtocol[]>>;
 };
 
 const defaultContextValue: ContextType = {
@@ -19,7 +26,7 @@ export type BagProviderProps = {
 };
 
 export const BagProvider = ({ children }: BagProviderProps) => {
-  const [bagItems, setBagItems] = useState<number[]>([]);
+  const [bagItems, setBagItems] = useState<BagItemProtocol[]>([]);
 
   useEffect(() => {
     setBagItems(getLSItem('bag') || []);

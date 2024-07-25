@@ -34,8 +34,21 @@ export default function Product({ product }: ProductPageProps) {
     setSelectedImg(e.target.value);
   };
 
-  const handleAddToBag = (id: number) => {
-    setBagItems([...bagItems, id]);
+  const handleAddToBag = (id: number, title: string, thumbnail: string) => {
+    let itemFinded = false;
+    const bagItemModified = bagItems.map((item) => {
+      if (item.id === id) {
+        itemFinded = true;
+        item.repeat = item.repeat + 1;
+        return item;
+      }
+      return item;
+    });
+    if (itemFinded) {
+      setBagItems(bagItemModified);
+      return;
+    }
+    setBagItems([...bagItems, { id, title, repeat: 1, thumbnail }]);
   };
 
   return (
@@ -90,7 +103,7 @@ export default function Product({ product }: ProductPageProps) {
             </span>
             <span className="price">{convertToBRL(product.price)}</span>
             <p className="description">{product.description}</p>
-            <Button onClick={() => handleAddToBag(product.id)}>
+            <Button onClick={() => handleAddToBag(product.id, product.title, product.thumbnail)}>
               <IoBagAdd />
               <span>Adicionar ao carrinho</span>
             </Button>

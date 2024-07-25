@@ -18,9 +18,22 @@ export default function Product({ id, thumbnail, title, brand, price }: ProductP
   const [imageLoaded, setImageLoaded] = useState(false);
   const { bagItems, setBagItems } = useBagContext();
 
-  const handleAddToBag = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+  const handleAddToBag = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setBagItems([...bagItems, id]);
+    let itemFinded = false;
+    const bagItemModified = bagItems.map((item) => {
+      if (item.id === id) {
+        itemFinded = true;
+        item.repeat = item.repeat + 1;
+        return item;
+      }
+      return item;
+    });
+    if (itemFinded) {
+      setBagItems(bagItemModified);
+      return;
+    }
+    setBagItems([...bagItems, { id, title, repeat: 1, thumbnail }]);
   };
 
   return (
@@ -49,7 +62,7 @@ export default function Product({ id, thumbnail, title, brand, price }: ProductP
           </div>
           <div className="buy-info">
             <span className="price">{convertToBRL(price)}</span>
-            <button type="button" onClick={(e) => handleAddToBag(e, id)}>
+            <button type="button" onClick={handleAddToBag}>
               <IoBagAdd />
             </button>
           </div>
