@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { BagItemProtocol, useBagContext } from '../../contexts/bag';
 
@@ -23,9 +24,19 @@ const BagItemComponent = ({
   useImage = true,
   className = '',
 }: BagItemProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
-    <BagItem className={className} href={`/product/${id}`}>
-      {useImage && <Image src={thumbnail} alt={`Produto ${title} da sacola`} width={80} height={80} />}
+    <BagItem className={`${className} ${!imageLoaded ? 'load-animation' : ''}`} href={`/product/${id}`}>
+      {useImage && (
+        <Image
+          src={thumbnail}
+          alt={`Produto ${title} da sacola`}
+          width={80}
+          height={80}
+          onLoad={() => setImageLoaded(true)}
+        />
+      )}
       <span>x{repeat}</span>
     </BagItem>
   );
