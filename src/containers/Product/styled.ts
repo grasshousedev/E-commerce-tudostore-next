@@ -151,6 +151,11 @@ export const ContainerMainInfos = styled.div`
         color: ${theme.colors.dark};
         font-weight: bold;
       `}
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .brand {
       display: block;
@@ -176,6 +181,7 @@ export const ContainerMainInfos = styled.div`
         ${({ theme }) => css`
           color: ${theme.colors.accent[1]};
         `}
+        text-wrap: nowrap;
 
         svg {
           width: 1.5rem;
@@ -204,12 +210,17 @@ export const ContainerMainInfos = styled.div`
     }
 
     .description {
-      padding: 0.5rem;
+      margin: 0.5rem;
       margin-bottom: 1rem;
       ${({ theme }) => css`
         font-size: ${theme.fontSizes.l6};
         color: ${theme.colors.dark};
       `}
+      display: -webkit-box;
+      -webkit-line-clamp: 6; // <- you can change rows number
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     & > button {
