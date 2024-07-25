@@ -19,7 +19,7 @@ export default function Menu() {
         <Link href="/" className={`${asPath === '/' ? 'in' : ''}`}>
           <IoStorefront />
         </Link>
-        <Link href="/cart" className={`${asPath === '/cart' ? 'in' : ''}`}>
+        <Link href="/bag" className={`${asPath === '/bag' ? 'in' : ''}`}>
           <IoBagHandle />
         </Link>
       </nav>

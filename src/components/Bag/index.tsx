@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import { BagItemProtocol, useBagContext } from '../../contexts/bag';
 
+import Button from '../Button';
+
 import { Container, BagItem, BagItems } from './styled';
 
 export type BagProductMinimalPartial = Partial<BagItemProtocol>;
@@ -67,6 +69,9 @@ export default function Bag() {
       <Container>
         <h1>Bolsa</h1>
         <BagItemsComponent bagItems={bagItems} />
+        <Button buttonType="link" href="/bag">
+          Ver Sacola
+        </Button>
       </Container>
     )
   );

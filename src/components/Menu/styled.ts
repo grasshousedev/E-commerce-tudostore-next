@@ -22,12 +22,12 @@ export const Container = styled.div`
     transition:
       background-color 0.2s ease-out,
       color 0.05s;
+    border-radius: 0.8rem;
 
     &.in {
       ${({ theme }) => css`
         background-color: ${theme.colors.placeholder};
         color: ${theme.colors.white};
-        border-radius: 0.8rem;
       `}
     }
 
