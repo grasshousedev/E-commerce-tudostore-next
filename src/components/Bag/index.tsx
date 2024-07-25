@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+import { IoBagHandle } from 'react-icons/io5';
+
 import { BagItemProtocol, useBagContext } from '../../contexts/bag';
 
 import Button from '../Button';
@@ -69,8 +71,9 @@ export default function Bag() {
       <Container>
         <h1>Bolsa</h1>
         <BagItemsComponent bagItems={bagItems} />
-        <Button buttonType="link" href="/bag">
-          Ver Sacola
+        <Button className="link-bag" buttonType="link" href="/bag">
+          <IoBagHandle />
+          <span>Ver Sacola</span>
         </Button>
       </Container>
     )

@@ -31,6 +31,12 @@ export const Container = styled.section`
       font-size: ${theme.fontSizes.l3};
     `}
   }
+
+  .link-bag {
+    margin-top: 2.625rem;
+    width: fit-content;
+    margin-inline: auto;
+  }
 `;
 
 export const BagItems = styled.div`

@@ -43,7 +43,7 @@ export const Container = styled.div`
 
 export const ContainerTop = styled.section`
   display: grid;
-  grid-template-columns: 0.38fr 0.62fr;
+  grid-template-columns: 0.47fr 0.53fr;
   gap: 2rem;
   margin-top: 1.5rem;
 
