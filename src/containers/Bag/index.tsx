@@ -19,7 +19,14 @@ export type BagItemDataProtocol = {
   price: number;
 };
 
-const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItemDataProtocol) => {
+const ContainerBagItem = ({
+  /* id, */ repeat,
+  thumbnail,
+  title,
+  rating,
+  brand,
+  price,
+}: BagItemDataProtocol) => {
   return (
     <BagItem>
       <div className="left-container">
