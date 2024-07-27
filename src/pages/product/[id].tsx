@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params;
   await delay(200);
 
-  const product = await getOneProduct(String(id));
+  const product = await getOneProduct(Array.isArray(id) ? Number(id[0]) : Number(id));
 
   return {
     props: {
