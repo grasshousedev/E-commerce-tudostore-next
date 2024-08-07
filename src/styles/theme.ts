@@ -16,6 +16,7 @@ export const theme: DefaultTheme = {
     warnColors: {
       danger: '#E5252C',
       warning: '#E6D117',
+      success: '#02D693',
     },
   },
   fontSizes: {
