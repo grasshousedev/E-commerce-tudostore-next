@@ -128,3 +128,8 @@ export const BagItem = styled.div`
     }
   }
 `;
+
+export const BagItemAnimated = styled.div`
+  height: 236px;
+  border-radius: 1.313rem;
+`;

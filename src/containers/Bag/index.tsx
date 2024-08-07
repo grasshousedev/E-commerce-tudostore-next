@@ -10,7 +10,7 @@ import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
 import { convertNumberDecimals } from '../../utils/convertNumberDecimals';
 
-import { Container, BagItems, BagItem } from './styled';
+import { Container, BagItems, BagItem, BagItemAnimated } from './styled';
 
 export type BagItemDataProtocol = {
   id: number;
@@ -84,18 +84,30 @@ const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }
 
 const ContainerBagItems = () => {
   const [bagData, setBagData] = useState<BagItemDataProtocol[]>([]);
+  const [itemsFirstRequest, setItemsFirstRequest] = useState(false);
   const { bagItems } = useBagContext();
 
   useEffect(() => {
-    if (bagItems.length === bagData.length) {
+    if (bagItems.length < bagData.length) {
+      const items = bagData.filter((item) => {
+        if (bagItems.findIndex((iItem) => iItem.id === item.id) !== -1) {
+          return true;
+        }
+        return false;
+      });
+      setBagData(items);
+    } else if (bagItems.length === bagData.length) {
       const items = bagData.map((item, i) => {
         item.repeat = bagItems[i].repeat;
         return item;
       });
       setBagData(items);
-      return;
     }
+  }, [bagItems]);
+
+  useEffect(() => {
     const requestBagData = async () => {
+      if (bagItems.length === 0) return;
       const items: BagItemDataProtocol[] = [];
       for (let i = 0; i < bagItems.length; i++) {
         const data = await jsonFetch(
@@ -113,24 +125,29 @@ const ContainerBagItems = () => {
         });
       }
       setBagData(items);
+      setItemsFirstRequest(true);
     };
+
+    if (itemsFirstRequest) return;
     requestBagData();
   }, [bagItems]);
 
   return (
     <BagItems>
-      {bagData.map((item) => (
-        <ContainerBagItem
-          key={item.id}
-          id={item.id}
-          repeat={item.repeat}
-          thumbnail={item.thumbnail}
-          title={item.title}
-          rating={item.rating}
-          brand={item.brand}
-          price={item.price}
-        />
-      ))}
+      {bagData.length > 0 &&
+        bagData.map((item) => (
+          <ContainerBagItem
+            key={item.id}
+            id={item.id}
+            repeat={item.repeat}
+            thumbnail={item.thumbnail}
+            title={item.title}
+            rating={item.rating}
+            brand={item.brand}
+            price={item.price}
+          />
+        ))}
+      {bagData.length === 0 && bagItems.map((_, i) => <BagItemAnimated key={i} className="load-animation" />)}
     </BagItems>
   );
 };
