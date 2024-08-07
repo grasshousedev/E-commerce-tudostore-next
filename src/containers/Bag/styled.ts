@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
-  margin-top: 2.5rem;
+  margin-block: 2.5rem;
 
   h1 {
     ${({ theme }) => css`
@@ -28,8 +28,9 @@ export const BagItem = styled.div`
   gap: 2rem;
 
   .left-container {
-    image {
+    img {
       height: 100%;
+      min-width: 200px;
       width: 100%;
       object-fit: contain;
     }

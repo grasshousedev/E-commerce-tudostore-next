@@ -22,6 +22,12 @@ export type BagItemDataProtocol = {
   price: number;
 };
 
+export type BagItemDataResponse = {
+  rating: number;
+  brand: string;
+  price: number;
+};
+
 const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItemDataProtocol) => {
   const { bagItems, setBagItems } = useBagContext();
 
@@ -85,7 +91,7 @@ const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }
 const ContainerBagItems = () => {
   const [bagData, setBagData] = useState<BagItemDataProtocol[]>([]);
   const [itemsFirstRequest, setItemsFirstRequest] = useState(false);
-  const { bagItems } = useBagContext();
+  const { bagItems, setBagItems } = useBagContext();
 
   useEffect(() => {
     if (bagItems.length < bagData.length) {
@@ -110,20 +116,32 @@ const ContainerBagItems = () => {
       if (bagItems.length === 0) return;
       const items: BagItemDataProtocol[] = [];
       for (let i = 0; i < bagItems.length; i++) {
-        const data = await jsonFetch(
-          `https://dummyjson.com/products/${encodeURIComponent(bagItems[i].id)}`,
-          'select=rating,brand,price',
-        );
-        items.push({
-          id: bagItems[i].id,
-          repeat: bagItems[i].repeat,
-          thumbnail: bagItems[i].thumbnail,
-          title: bagItems[i].title,
-          rating: data.rating,
-          brand: data.brand,
-          price: data.price,
-        });
+        try {
+          const { response, json: data }: { response: Response; json: BagItemDataResponse } = await jsonFetch(
+            `https://dummyjson.com/products/${encodeURIComponent(bagItems[i].id)}`,
+            'select=rating,brand,price',
+            true,
+          );
+          if (response.status === 200) {
+            items.push({
+              id: bagItems[i].id,
+              repeat: bagItems[i].repeat,
+              thumbnail: bagItems[i].thumbnail,
+              title: bagItems[i].title,
+              rating: data.rating,
+              brand: data.brand,
+              price: data.price,
+            });
+          } else if (response.status === 404) {
+            console.error(`Product not found: ${bagItems[i].id}`);
+            setBagItems(bagItems.filter((item) => item.id !== bagItems[i].id));
+          }
+        } catch (err) {
+          console.error('Error fetching data:', err);
+          return;
+        }
       }
+      console.log(items);
       setBagData(items);
       setItemsFirstRequest(true);
     };
