@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import { IoBagHandle } from 'react-icons/io5';
 
+import { focusPages } from '../../config/focusPages';
+
 import { BagItemProtocol, useBagContext } from '../../contexts/bag';
 
 import { convertToBRL } from '../../utils/convertPriceBRL';
@@ -72,8 +74,10 @@ export default function Bag() {
   const { bagItems, bagTotal } = useBagContext();
 
   const inBag = pathname === '/bag' ? true : false;
+  const inFocusPage = focusPages.bagComponent.includes(pathname);
 
   return (
+    !inFocusPage &&
     bagItems.length > 0 && (
       <Container>
         <h1>Bolsa</h1>
