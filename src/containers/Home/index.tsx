@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { IoSearch } from 'react-icons/io5';
 
@@ -25,6 +25,7 @@ export default function Home({ products }: HomePageProps) {
   const [productsData, setProductsData] = useState(products);
   const [page, setPage] = useState(1);
   const [isLoadingMoreProducts, setIsLoadingMoreProducts] = useState(false);
+  const debounceTimeoutRef = useRef(null);
 
   const loadMoreProducts = async () => {
     setIsLoadingMoreProducts(true);
@@ -43,11 +44,15 @@ export default function Home({ products }: HomePageProps) {
   };
 
   useEffect(() => {
-    if (productsData.products.length >= productsData.total || isLoadingMoreProducts) return;
-
     const handleScrollLoadMore = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoadingMoreProducts) {
-        loadMoreProducts();
+        if (debounceTimeoutRef.current) {
+          clearTimeout(debounceTimeoutRef.current);
+        }
+
+        debounceTimeoutRef.current = setTimeout(() => {
+          loadMoreProducts();
+        }, 0);
       }
     };
 
@@ -55,9 +60,12 @@ export default function Home({ products }: HomePageProps) {
 
     return () => {
       window.removeEventListener('scroll', handleScrollLoadMore);
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [isLoadingMoreProducts]);
 
   const handleActiveInputSearch = () => {
     setInputFocused(true);
