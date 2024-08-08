@@ -24,7 +24,7 @@ export default function Menu() {
         </Link>
       </nav>
       <div className="me">
-        <Link href="https://www.gabrieltomas.com.br" target="_blank">
+        <Link href="/profile" className={`${asPath === '/profile' ? 'in' : ''}`}>
           <IoPerson />
         </Link>
       </div>

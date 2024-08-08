@@ -113,6 +113,7 @@ const ContainerBagItems = () => {
       });
       setBagData(items);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bagItems]);
 
   useEffect(() => {
@@ -152,11 +153,13 @@ const ContainerBagItems = () => {
 
     if (itemsFirstRequest) return;
     requestBagData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bagItems]);
 
   useEffect(() => {
     const total = bagData.reduce((acc, item) => acc + item.price * item.repeat, 0);
     setBagTotal(total);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bagData]);
 
   return (
