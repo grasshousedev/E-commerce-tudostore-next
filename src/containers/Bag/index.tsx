@@ -1,16 +1,19 @@
 import Image from 'next/image';
+
 import { useEffect, useState } from 'react';
 
 import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 
 import { useBagContext } from '../../contexts/bag';
 
+import Button from '../../components/Button';
+
 import { jsonFetch } from '../../utils/jsonFetch';
 import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
 import { convertNumberDecimals } from '../../utils/convertNumberDecimals';
 
-import { Container, BagItems, BagItem, BagItemAnimated } from './styled';
+import { Container, BagItems, BagItem, BagItemAnimated, ContainerEmpty } from './styled';
 
 export type BagItemDataProtocol = {
   id: number;
@@ -91,6 +94,7 @@ const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }
 const ContainerBagItems = () => {
   const [bagData, setBagData] = useState<BagItemDataProtocol[]>([]);
   const [itemsFirstRequest, setItemsFirstRequest] = useState(false);
+  const [runnedFuncRequest, setRunnedFuncRequest] = useState(false);
   const { bagItems, setBagItems } = useBagContext();
 
   useEffect(() => {
@@ -113,6 +117,7 @@ const ContainerBagItems = () => {
 
   useEffect(() => {
     const requestBagData = async () => {
+      setRunnedFuncRequest(true);
       if (bagItems.length === 0) return;
       const items: BagItemDataProtocol[] = [];
       for (let i = 0; i < bagItems.length; i++) {
@@ -149,23 +154,39 @@ const ContainerBagItems = () => {
     requestBagData();
   }, [bagItems]);
 
+  console.log(bagData);
+
   return (
-    <BagItems>
-      {bagData.length > 0 &&
-        bagData.map((item) => (
-          <ContainerBagItem
-            key={item.id}
-            id={item.id}
-            repeat={item.repeat}
-            thumbnail={item.thumbnail}
-            title={item.title}
-            rating={item.rating}
-            brand={item.brand}
-            price={item.price}
-          />
-        ))}
-      {bagData.length === 0 && bagItems.map((_, i) => <BagItemAnimated key={i} className="load-animation" />)}
-    </BagItems>
+    <>
+      <BagItems className={runnedFuncRequest && bagItems.length === 0 ? 'hide' : ''}>
+        {bagData.length > 0 &&
+          bagData.map((item) => (
+            <ContainerBagItem
+              key={item.id}
+              id={item.id}
+              repeat={item.repeat}
+              thumbnail={item.thumbnail}
+              title={item.title}
+              rating={item.rating}
+              brand={item.brand}
+              price={item.price}
+            />
+          ))}
+        {bagData.length === 0 &&
+          bagItems.map((_, i) => <BagItemAnimated key={i} className="load-animation" />)}
+      </BagItems>
+      {runnedFuncRequest && bagItems.length === 0 && (
+        <ContainerEmpty>
+          <h2>Parece que sua bolsa está vázia</h2>
+          <p>
+            Adicione produtos ao seu carrinho para começar a comprar e visualizar as suas compras futuras.
+          </p>
+          <Button href="/" buttonType="link">
+            Ir para o início
+          </Button>
+        </ContainerEmpty>
+      )}
+    </>
   );
 };
 

@@ -15,6 +15,10 @@ export const Container = styled.section`
 export const BagItems = styled.div`
   margin-top: 1.5rem;
 
+  &.hide {
+    display: none;
+  }
+
   div + div {
     margin-top: 1.5rem;
   }
@@ -133,4 +137,38 @@ export const BagItem = styled.div`
 export const BagItemAnimated = styled.div`
   height: 236px;
   border-radius: 1.313rem;
+`;
+
+export const ContainerEmpty = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: max(333px, 50%);
+  margin-inline: auto;
+
+  ${({ theme }) => css`
+    h2 {
+      font-size: ${theme.fontSizes.l4};
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: ${theme.fontSizes.base};
+      color: ${theme.colors.secondary};
+      margin-bottom: 1.5rem;
+    }
+
+    h2,
+    p {
+      color: ${theme.colors.dark};
+      text-align: center;
+    }
+
+    a {
+      font-size: ${theme.fontSizes.l6};
+      width: clamp(150px, 50%, 300px);
+    }
+  `}
 `;
