@@ -141,7 +141,6 @@ const ContainerBagItems = () => {
           return;
         }
       }
-      console.log(items);
       setBagData(items);
       setItemsFirstRequest(true);
     };
