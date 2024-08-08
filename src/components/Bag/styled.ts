@@ -10,6 +10,8 @@ export const Container = styled.section`
   width: 35%;
   max-width: 400px;
   padding: 2.031rem;
+  display: flex;
+  flex-direction: column;
 
   &:before {
     content: '';
@@ -32,10 +34,24 @@ export const Container = styled.section`
     `}
   }
 
+  .total {
+    margin-top: 2.125rem;
+    font-size: ${({ theme }) => theme.fontSizes.l6};
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+
   .link-bag {
-    margin-top: 2.625rem;
+    margin-top: 2.125rem;
     width: fit-content;
     margin-inline: auto;
+
+    &.mt-2 {
+      margin-top: 2rem;
+    }
   }
 `;
 

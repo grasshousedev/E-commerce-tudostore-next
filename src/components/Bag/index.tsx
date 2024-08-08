@@ -1,9 +1,12 @@
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { IoBagHandle } from 'react-icons/io5';
 
 import { BagItemProtocol, useBagContext } from '../../contexts/bag';
+
+import { convertToBRL } from '../../utils/convertPriceBRL';
 
 import Button from '../Button';
 
@@ -64,16 +67,30 @@ const BagItemsComponent = ({ bagItems }: BagItemsProps) => {
 };
 
 export default function Bag() {
-  const { bagItems } = useBagContext();
+  const pathname = usePathname();
+
+  const { bagItems, bagTotal } = useBagContext();
+
+  const inBag = pathname === '/bag' ? true : false;
 
   return (
     bagItems.length > 0 && (
       <Container>
         <h1>Bolsa</h1>
         <BagItemsComponent bagItems={bagItems} />
-        <Button className="link-bag" buttonType="link" href="/bag">
+        {inBag && (
+          <div className="total">
+            <span>Total:</span>
+            <span>{convertToBRL(bagTotal)}</span>
+          </div>
+        )}
+        <Button
+          className={`link-bag ${inBag ? 'mt-2' : ''}`}
+          buttonType="link"
+          href={inBag ? '/checkout' : '/bag'}
+        >
           <IoBagHandle />
-          <span>Ver Sacola</span>
+          <span>{inBag ? 'Comprar' : 'Ver Sacola'}</span>
         </Button>
       </Container>
     )

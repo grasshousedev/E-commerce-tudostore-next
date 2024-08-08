@@ -12,11 +12,15 @@ export type BagItemProtocol = {
 export type ContextType = {
   bagItems: BagItemProtocol[];
   setBagItems: React.Dispatch<React.SetStateAction<BagItemProtocol[]>>;
+  bagTotal: number;
+  setBagTotal: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const defaultContextValue: ContextType = {
   bagItems: [],
   setBagItems: () => {},
+  bagTotal: 0,
+  setBagTotal: () => {},
 };
 
 const Context = createContext<ContextType>(defaultContextValue);
@@ -27,6 +31,7 @@ export type BagProviderProps = {
 
 export const BagProvider = ({ children }: BagProviderProps) => {
   const [bagItems, setBagItems] = useState<BagItemProtocol[]>([]);
+  const [bagTotal, setBagTotal] = useState<number>(0);
 
   useEffect(() => {
     setBagItems(getLSItem('bag') || []);
@@ -36,7 +41,9 @@ export const BagProvider = ({ children }: BagProviderProps) => {
     setLSItem('bag', bagItems);
   }, [bagItems]);
 
-  return <Context.Provider value={{ bagItems, setBagItems }}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ bagItems, setBagItems, bagTotal, setBagTotal }}>{children}</Context.Provider>
+  );
 };
 
 export function useBagContext() {

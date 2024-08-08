@@ -95,7 +95,7 @@ const ContainerBagItems = () => {
   const [bagData, setBagData] = useState<BagItemDataProtocol[]>([]);
   const [itemsFirstRequest, setItemsFirstRequest] = useState(false);
   const [runnedFuncRequest, setRunnedFuncRequest] = useState(false);
-  const { bagItems, setBagItems } = useBagContext();
+  const { bagItems, setBagItems, setBagTotal } = useBagContext();
 
   useEffect(() => {
     if (bagItems.length < bagData.length) {
@@ -154,7 +154,10 @@ const ContainerBagItems = () => {
     requestBagData();
   }, [bagItems]);
 
-  console.log(bagData);
+  useEffect(() => {
+    const total = bagData.reduce((acc, item) => acc + item.price * item.repeat, 0);
+    setBagTotal(total);
+  }, [bagData]);
 
   return (
     <>
