@@ -2,13 +2,16 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
   margin-block: 2.5rem;
-  display: flex;
-  gap: 2rem;
   max-width: 1200px;
   margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 
   header {
     width: 80%;
+    align-self: center;
+
     h1 {
       ${({ theme }) => css`
         color: ${theme.colors.dark};
