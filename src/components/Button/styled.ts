@@ -60,4 +60,10 @@ export const ContainerLink = styled(Link)`
     width: 1.5rem;
     height: 1.5rem;
   }
+
+  span {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+  }
 `;
