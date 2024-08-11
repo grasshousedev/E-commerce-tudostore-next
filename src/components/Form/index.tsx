@@ -45,6 +45,7 @@ export default function Form({ title, fields, onSubmitAction, submitBtnContent, 
               <div className="container-input" key={i}>
                 <label htmlFor={field.input.id}>{field.label.content}</label>
                 <input {...field.input} />
+                <div className="container-tips"></div>
               </div>
             ))}
           </div>

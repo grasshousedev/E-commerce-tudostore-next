@@ -85,6 +85,17 @@ export const FormContainer = styled.form`
           border-radius: 0.813rem;
           box-shadow: 0 4px 16px ${theme.colors.placeholder}26;
         }
+
+        .container-tips {
+          padding-left: 0.5rem;
+          margin-top: 0.5rem;
+
+          span {
+            color: ${theme.colors.warnColors.danger};
+            font-size: ${theme.fontSizes.small};
+            font-weight: 500;
+          }
+        }
       `}
     }
   }

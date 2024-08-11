@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
+import { Toaster } from 'react-hot-toast';
+
 import { GlobalStyles, LayoutWrapper } from '../styles/global-styles';
 
 import { BagProvider } from '../contexts/bag';
@@ -12,18 +14,21 @@ import { theme } from '../styles/theme';
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider>
-      <BagProvider>
-        <ThemeProvider theme={theme}>
-          <LayoutWrapper>
-            <Menu />
-            <Component {...pageProps} />
-            <Bag />
-          </LayoutWrapper>
-          <GlobalStyles />
-        </ThemeProvider>
-      </BagProvider>
-    </UserProvider>
+    <>
+      <Toaster />
+      <UserProvider>
+        <BagProvider>
+          <ThemeProvider theme={theme}>
+            <LayoutWrapper>
+              <Menu />
+              <Component {...pageProps} />
+              <Bag />
+            </LayoutWrapper>
+            <GlobalStyles />
+          </ThemeProvider>
+        </BagProvider>
+      </UserProvider>
+    </>
   );
 }
 
