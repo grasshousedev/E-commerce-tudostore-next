@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { css } from 'styled-components';
 
-export const Container = styled.section`
+export const Container = styled.main`
   button.btn-load-more {
     display: block;
     ${({ theme }) => css`
