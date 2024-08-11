@@ -8,7 +8,7 @@ import logo from '../../assets/logo.svg';
 import { IoStorefront, IoBagHandle, IoPerson } from 'react-icons/io5';
 
 export default function Menu() {
-  const { asPath } = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <Container>
@@ -16,15 +16,15 @@ export default function Menu() {
         <Link className="logo" href="/">
           <Image src={logo} alt="Logo da página" />
         </Link>
-        <Link href="/" className={`${asPath === '/' ? 'in' : ''}`}>
+        <Link href="/" className={`${pathname === '/' ? 'in' : ''}`}>
           <IoStorefront />
         </Link>
-        <Link href="/bag" className={`${asPath === '/bag' ? 'in' : ''}`}>
+        <Link href="/bag" className={`${pathname === '/bag' ? 'in' : ''}`}>
           <IoBagHandle />
         </Link>
       </nav>
       <div className="me">
-        <Link href="/profile" className={`${asPath === '/profile' ? 'in' : ''}`}>
+        <Link href="/profile" className={`${pathname === '/profile' ? 'in' : ''}`}>
           <IoPerson />
         </Link>
       </div>

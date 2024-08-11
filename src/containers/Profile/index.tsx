@@ -1,3 +1,4 @@
+import { useSearchParams, useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { isEmail } from 'validator';
@@ -13,6 +14,11 @@ import Form from '../../components/Form';
 import { Container } from './styled';
 
 export default function Profile() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirectParam = searchParams.get('redirect');
+
   const { setUser } = useUserContext();
   const [userData, setUserData] = useState({
     isLoggedIn: false,
@@ -99,7 +105,13 @@ export default function Profile() {
       password: '',
       confirmPassword: '',
     });
+    toast.success('Logado com sucesso');
+    if (redirectParam) {
+      router.push(redirectParam);
+    }
   };
+
+  console.log(redirectParam);
 
   return (
     <Container>

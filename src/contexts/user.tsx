@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 import { getLSItem, setLSItem } from '../services/localStorage';
 
+import { validationGeral } from '../utils/validationUser';
+
 export type UserProtocol = {
   isLoggedIn: boolean;
   email: string;
@@ -11,11 +13,13 @@ export type UserProtocol = {
 export type ContextType = {
   user: UserProtocol;
   setUser: React.Dispatch<React.SetStateAction<UserProtocol>>;
+  useLSLoaded: boolean;
 };
 
 const defaultContextValue: ContextType = {
   user: { isLoggedIn: false, email: '', password: '' },
   setUser: () => {},
+  useLSLoaded: false,
 };
 
 const Context = createContext<ContextType>(defaultContextValue);
@@ -26,9 +30,11 @@ export type UserProviderProps = {
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProtocol>(defaultContextValue.user);
+  const [useLSLoaded, setLSLoaded] = useState(false);
 
   useEffect(() => {
     setUser(getLSItem('user') || user);
+    setLSLoaded(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,13 +50,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     };
 
     !validateUser(user) && setUser(defaultContextValue.user);
+    user.isLoggedIn &&
+      validationGeral(user.email, user.password).length > 0 &&
+      setUser(defaultContextValue.user);
   }, [user]);
 
   useEffect(() => {
     setLSItem('user', user);
   }, [user]);
 
-  return <Context.Provider value={{ user, setUser }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ user, setUser, useLSLoaded }}>{children}</Context.Provider>;
 };
 
 export function useUserContext() {

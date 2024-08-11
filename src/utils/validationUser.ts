@@ -41,7 +41,7 @@ export const validatePassword = (password: string) => {
   return { msg: errorMessage, isValid: isStrong };
 };
 
-export const validationGeral = (email: string, password: string, confirmPassword: string) => {
+export const validationGeral = (email: string, password: string, confirmPassword?: string) => {
   const errors: string[] = [];
 
   if (email.length > 0 && !isEmail(email)) {
@@ -53,7 +53,7 @@ export const validationGeral = (email: string, password: string, confirmPassword
     errors.push(msg);
   }
 
-  if (confirmPassword.length > 0 && confirmPassword !== password) {
+  if (confirmPassword && confirmPassword.length > 0 && confirmPassword !== password) {
     errors.push('As senhas não são iguais');
   }
 
