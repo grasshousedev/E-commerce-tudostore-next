@@ -153,7 +153,7 @@ export default function Register({ setUser }: RegisterProps) {
           },
           {
             input: {
-              type: 'confirm-password',
+              type: 'password',
               name: 'confirm-password',
               id: 'confirm-password',
               placeholder: 'Exemplo0Ab#',
