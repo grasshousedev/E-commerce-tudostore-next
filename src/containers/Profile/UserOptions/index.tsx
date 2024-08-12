@@ -38,6 +38,7 @@ const UserCard = () => {
 
   const handleLogout = () => {
     setUser({ isLoggedIn: false, name: '', email: '', password: '', userImage: '' });
+    toast.success('Deslogado com sucesso');
   };
 
   return (
