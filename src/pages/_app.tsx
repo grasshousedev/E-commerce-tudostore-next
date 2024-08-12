@@ -15,7 +15,14 @@ import { theme } from '../styles/theme';
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: {
+            fontSize: theme.fontSizes.l6,
+            color: theme.colors.dark,
+          },
+        }}
+      />
       <UserProvider>
         <BagProvider>
           <ThemeProvider theme={theme}>
