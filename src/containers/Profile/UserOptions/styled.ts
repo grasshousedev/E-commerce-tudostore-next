@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   margin-block: 2.5rem;
 
-  header {
+  & > header {
     width: 80%;
     align-self: center;
 
@@ -25,6 +25,123 @@ export const Container = styled.main`
   }
 `;
 
-export const Cards = styled.section``;
+export const Cards = styled.section`
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+`;
 
-export const Card = styled.div``;
+export const Card = styled.div`
+  border-radius: 1.313rem;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: 1rem 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  header {
+    * > h1,
+    h2 {
+      ${({ theme }) => css`
+        font-size: ${theme.fontSizes.l4};
+      `}
+    }
+  }
+
+  .container-img {
+    width: 46px;
+    height: 46px;
+    background-color: ${({ theme }) => theme.colors.accent[1]}80;
+    border-radius: 5rem;
+    position: relative;
+    cursor: pointer;
+
+    img,
+    & > svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    img {
+      border-radius: 5rem;
+    }
+
+    & > svg {
+      padding: 0.6rem;
+    }
+
+    .edit-icon {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .container-newimg {
+        position: absolute;
+        bottom: 0;
+        left: 1.5rem;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+
+        & > * {
+          display: block;
+        }
+
+        input {
+          background-color: ${({ theme }) => theme.colors.white};
+          box-shadow: 0 4px 16px ${({ theme }) => theme.colors.placeholder}26;
+          width: 180px;
+          height: 1.6rem;
+          padding: 0.3rem;
+          border-radius: 0.3rem;
+          font-size: ${({ theme }) => theme.fontSizes.base};
+        }
+
+        button {
+          svg {
+            width: 1rem;
+            height: 1rem;
+            color: ${({ theme }) => theme.colors.warnColors.success};
+          }
+        }
+      }
+    }
+  }
+
+  .container-bottom {
+    display: flex;
+    justify-content: space-between;
+
+    .container-left {
+      display: flex;
+      flex-direction: column;
+      font-size: ${({ theme }) => theme.fontSizes.l6};
+      gap: 0.5rem;
+      div {
+        font-size: inherit;
+      }
+
+      span:not(span.accent-color) {
+        font-size: inherit;
+        color: ${({ theme }) => theme.colors.dark};
+      }
+    }
+
+    .container-right {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin-top: auto;
+      }
+    }
+  }
+`;

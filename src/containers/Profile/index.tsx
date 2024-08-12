@@ -4,7 +4,9 @@ import Register from './Register';
 import UserOptions from './UserOptions';
 
 export default function Profile() {
-  const { user, setUser, useLSLoaded } = useUserContext();
+  const { user, setUser, userLSLoaded } = useUserContext();
 
-  return useLSLoaded && user.isLoggedIn ? <UserOptions /> : <Register setUser={setUser} />;
+  console.log(userLSLoaded, user);
+
+  return userLSLoaded && user.isLoggedIn ? <UserOptions /> : userLSLoaded && <Register setUser={setUser} />;
 }

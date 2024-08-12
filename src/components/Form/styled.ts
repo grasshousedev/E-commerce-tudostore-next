@@ -12,15 +12,6 @@ export const Container = styled.section`
 
   header {
     padding: 0.5rem;
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      font-size: ${({ theme }) => theme.fontSizes.l4};
-    }
   }
 
   .container-footer {

@@ -101,7 +101,13 @@ export default function Register({ setUser }: RegisterProps) {
       return;
     }
 
-    setUser({ isLoggedIn: true, email: userData.email, password: userData.password });
+    setUser({
+      isLoggedIn: true,
+      name: `user-${crypto.randomUUID().slice(0, 5)}`,
+      email: userData.email,
+      password: userData.password,
+      userImage: '',
+    });
     setUserData({
       isLoggedIn: false,
       email: '',
@@ -121,7 +127,7 @@ export default function Register({ setUser }: RegisterProps) {
         <p>Crie uma conta ou entre com seu email e senha.</p>
       </header>
       <Form
-        title="<h2>Se cadastre</h2>"
+        title={`<h2 class="title-all-uppercase-spaced">Se cadastre</h2>`}
         fields={[
           {
             input: {

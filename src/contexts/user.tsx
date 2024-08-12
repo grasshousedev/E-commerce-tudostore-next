@@ -6,20 +6,22 @@ import { validationGeral } from '../utils/validationUser';
 
 export type UserProtocol = {
   isLoggedIn: boolean;
+  name: string;
   email: string;
   password: string;
+  userImage: string;
 };
 
 export type ContextType = {
   user: UserProtocol;
   setUser: React.Dispatch<React.SetStateAction<UserProtocol>>;
-  useLSLoaded: boolean;
+  userLSLoaded: boolean;
 };
 
 const defaultContextValue: ContextType = {
-  user: { isLoggedIn: false, email: '', password: '' },
+  user: { isLoggedIn: false, name: '', email: '', password: '', userImage: '' },
   setUser: () => {},
-  useLSLoaded: false,
+  userLSLoaded: false,
 };
 
 const Context = createContext<ContextType>(defaultContextValue);
@@ -30,7 +32,7 @@ export type UserProviderProps = {
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProtocol>(defaultContextValue.user);
-  const [useLSLoaded, setLSLoaded] = useState(false);
+  const [userLSLoaded, setLSLoaded] = useState(false);
 
   useEffect(() => {
     setUser(getLSItem('user') || user);
@@ -45,7 +47,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         typeof obj === 'object' &&
         typeof obj.isLoggedIn === 'boolean' &&
         typeof obj.email === 'string' &&
-        typeof obj.password === 'string'
+        typeof obj.password === 'string' &&
+        typeof obj.userImage === 'string'
       );
     };
 
@@ -59,7 +62,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     setLSItem('user', user);
   }, [user]);
 
-  return <Context.Provider value={{ user, setUser, useLSLoaded }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ user, setUser, userLSLoaded }}>{children}</Context.Provider>;
 };
 
 export function useUserContext() {
