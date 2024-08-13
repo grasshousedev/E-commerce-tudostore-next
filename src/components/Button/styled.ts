@@ -27,18 +27,32 @@ const style = css`
       background-color: ${theme.colors.placeholder}C0;
     }
 
-    &.danger {
-      border: 1px solid ${theme.colors.warnColors.danger};
-      color: ${theme.colors.warnColors.danger};
+    &.outline {
+      border: 1px solid ${theme.colors.dark};
+      color: ${theme.colors.dark};
       background: transparent;
 
+      &.danger {
+        border: 1px solid ${theme.colors.warnColors.danger};
+        color: ${theme.colors.warnColors.danger};
+
+        &:hover {
+          background-color: ${theme.colors.warnColors.danger}E0;
+          color: ${theme.colors.white};
+        }
+
+        &:active {
+          background-color: ${theme.colors.warnColors.danger}C0;
+        }
+      }
+
       &:hover {
-        background-color: ${theme.colors.warnColors.danger}E0;
+        background-color: ${theme.colors.placeholder}E0;
         color: ${theme.colors.white};
       }
 
       &:active {
-        background-color: ${theme.colors.warnColors.danger}C0;
+        background-color: ${theme.colors.placeholder}C0;
       }
     }
   `}

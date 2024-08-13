@@ -1,13 +1,16 @@
 import { ChangeEvent, useState } from 'react';
 import { FaUser, FaEdit, FaCheckCircle } from 'react-icons/fa';
+import { IoCard } from 'react-icons/io5';
 import { isURL } from 'validator';
 import toast from 'react-hot-toast';
 
 import { useUserContext } from '../../../contexts/user';
 
+import { creditCardType } from '../../../utils/checkCreditCard';
+
 import Button from '../../../components/Button';
 
-import { Container, Cards, Card } from './styled';
+import { Container, Cards, Card, ContainerCardBottom } from './styled';
 
 const UserCard = () => {
   const { user, setUser, LSLoaded } = useUserContext();
@@ -61,7 +64,7 @@ const UserCard = () => {
             )}
           </div>
         </div>
-        <div className="container-bottom">
+        <ContainerCardBottom>
           <div className="container-left">
             <div>
               Nome de usuário: <span className="accent-color">{user.name}!</span>
@@ -71,13 +74,58 @@ const UserCard = () => {
             </div>
           </div>
           <div className="container-right">
-            <Button className="danger" onClick={handleLogout}>
+            <Button className="outline danger auto-top" onClick={handleLogout}>
               Logout
             </Button>
           </div>
-        </div>
+        </ContainerCardBottom>
       </Card>
     )
+  );
+};
+
+const UserCardsCard = () => {
+  const { cards, LSLoaded } = useUserContext();
+
+  console.log(LSLoaded, cards);
+
+  return (
+    <Card>
+      <header>
+        <h2 className="title-all-uppercase-spaced">Método de pagamento</h2>
+      </header>
+      <ContainerCardBottom className="center-items">
+        <div className="container-left">
+          {cards.length > 0 ? (
+            cards.map(
+              (card, i) =>
+                card.isDefault && (
+                  <div key={i}>
+                    <div className="card-info">
+                      <IoCard />
+                      <span>
+                        {creditCardType(card.cardNumbers)} terminando com{' '}
+                        <span>
+                          {card.cardNumbers.slice(card.cardNumbers.length - 4, card.cardNumbers.length)}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                ),
+            )
+          ) : (
+            <div className="empty">
+              <p>Parece que você não tem nenhum cartão cadastrado, adicione um novo cartão</p>
+            </div>
+          )}
+        </div>
+        <div className="container-right">
+          <Button className="outline" buttonType="link" href="/profile/cards">
+            Mudar
+          </Button>
+        </div>
+      </ContainerCardBottom>
+    </Card>
   );
 };
 
@@ -90,11 +138,7 @@ export default function UserOptions() {
       </header>
       <Cards>
         <UserCard />
-        <Card>
-          <header>
-            <h2 className="title-all-uppercase-spaced">Método de pagamento</h2>
-          </header>
-        </Card>
+        <UserCardsCard />
       </Cards>
     </Container>
   );

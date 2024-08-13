@@ -1,17 +1,16 @@
-import { useRouter } from 'next/navigation';
-
-import { useUserContext } from '../../contexts/user';
+import { useRouter } from 'next/router';
+import { useClosedPage } from '../../hooks/closedPage';
 
 import { Container } from './styled';
 
 export default function Checkout() {
   const router = useRouter();
 
-  const { user, LSLoaded } = useUserContext();
+  const { isClosed, LSLoaded } = useClosedPage();
 
-  if (LSLoaded && !user.isLoggedIn) {
+  if (LSLoaded && !isClosed) {
     router.push(`/profile?redirect=${encodeURIComponent('/checkout')}`);
   }
 
-  return LSLoaded && user.isLoggedIn && <Container>CHECKOUT</Container>;
+  return LSLoaded && isClosed && <Container>CHECKOUT</Container>;
 }

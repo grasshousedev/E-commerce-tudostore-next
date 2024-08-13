@@ -115,31 +115,49 @@ export const Card = styled.div`
       }
     }
   }
+`;
 
-  .container-bottom {
+export const ContainerCardBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  &.center-items {
+    height: 100%;
+    align-items: center;
+  }
+
+  .container-left {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    font-size: ${({ theme }) => theme.fontSizes.l6};
+    gap: 0.5rem;
 
-    .container-left {
-      display: flex;
-      flex-direction: column;
-      font-size: ${({ theme }) => theme.fontSizes.l6};
-      gap: 0.5rem;
-      div {
-        font-size: inherit;
-      }
-
-      span:not(span.accent-color) {
-        font-size: inherit;
-        color: ${({ theme }) => theme.colors.dark};
-      }
+    div {
+      font-size: inherit;
     }
 
-    .container-right {
-      display: flex;
-      flex-direction: column;
+    span:not(span.accent-color) {
+      font-size: inherit;
+      color: ${({ theme }) => theme.colors.dark};
+    }
 
-      button {
+    .empty {
+      p {
+        ${({ theme }) => css`
+          color: ${theme.colors.secondary};
+          font-size: ${theme.fontSizes.l6};
+        `}
+      }
+    }
+  }
+
+  .container-right {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      &.auto-top {
         margin-top: auto;
       }
     }
