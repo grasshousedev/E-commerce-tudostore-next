@@ -10,7 +10,8 @@ import { creditCardType } from '../../../utils/checkCreditCard';
 
 import Button from '../../../components/Button';
 
-import { Container, Cards, Card, ContainerCardBottom } from './styled';
+import { Card, ContainerCardBottom } from '../../../styles/card';
+import { Container, Cards } from './styled';
 
 const UserCard = () => {
   const { user, setUser, LSLoaded } = useUserContext();

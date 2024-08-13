@@ -1,56 +1,9 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.section`
-  padding: 2rem;
-  max-width: 676px;
-  height: fit-content;
-  margin-inline: auto;
-  border-radius: 0.938rem;
-  ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-  `}
-
-  header {
-    padding: 0.5rem;
-  }
-
-  .container-footer {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    button {
-      padding: 0.5rem 1.5rem;
-      text-decoration: underline;
-      ${({ theme }) => css`
-        color: ${theme.colors.dark};
-        font-size: ${theme.fontSizes.base};
-      `}
-    }
-
-    & > span {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: ${({ theme }) => theme.colors.accent[2]};
-
-      svg {
-        height: 1.5rem;
-        width: 1.5rem;
-      }
-
-      & > span {
-        font-size: ${({ theme }) => theme.fontSizes.base};
-        letter-spacing: -0.02em;
-      }
-    }
-  }
-`;
-
 export const FormContainer = styled.form`
+  margin-top: 1.5rem;
+
   .container-inputs {
-    margin-top: 1.5rem;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -97,6 +50,39 @@ export const FormContainer = styled.form`
 
     button {
       width: 100%;
+    }
+  }
+`;
+
+export const Footer = styled.footer`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    padding: 0.5rem 1.5rem;
+    text-decoration: underline;
+    ${({ theme }) => css`
+      color: ${theme.colors.dark};
+      font-size: ${theme.fontSizes.base};
+    `}
+  }
+
+  & > span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${({ theme }) => theme.colors.accent[2]};
+
+    svg {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    & > span {
+      font-size: ${({ theme }) => theme.fontSizes.base};
+      letter-spacing: -0.02em;
     }
   }
 `;

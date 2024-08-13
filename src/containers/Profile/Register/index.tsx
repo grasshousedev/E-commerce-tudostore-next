@@ -12,6 +12,7 @@ import { toastArrayRun } from '../../../utils/runToastArray';
 import Form from '../../../components/Form';
 
 import { Container } from './styled';
+import { CardSection } from '../../../styles/card';
 
 export type RegisterProps = {
   setUser: Dispatch<SetStateAction<UserProtocol>>;
@@ -126,55 +127,59 @@ export default function Register({ setUser }: RegisterProps) {
         <h1>Se cadastre ou faça o login</h1>
         <p>Crie uma conta ou entre com seu email e senha.</p>
       </header>
-      <Form
-        title={`<h2 class="title-all-uppercase-spaced">Se cadastre</h2>`}
-        fields={[
-          {
-            input: {
-              type: 'text',
-              name: 'email',
-              id: 'email',
-              placeholder: 'exemplo@gmail.com',
-              value: userData.email,
-              onChange: handleEmailChange,
+      <CardSection className="m-padding">
+        <header>
+          <h2 className="title-all-uppercase-spaced">Se cadastre</h2>
+        </header>
+        <Form
+          fields={[
+            {
+              input: {
+                type: 'text',
+                name: 'email',
+                id: 'email',
+                placeholder: 'exemplo@gmail.com',
+                value: userData.email,
+                onChange: handleEmailChange,
+              },
+              label: {
+                content: 'Email',
+                htmlFor: 'email',
+              },
             },
-            label: {
-              content: 'Email',
-              htmlFor: 'email',
+            {
+              input: {
+                type: 'password',
+                name: 'password',
+                id: 'password',
+                placeholder: 'Exemplo0Ab#',
+                value: userData.password,
+                onChange: handlePasswordChange,
+              },
+              label: {
+                content: 'Senha',
+                htmlFor: 'password',
+              },
             },
-          },
-          {
-            input: {
-              type: 'password',
-              name: 'password',
-              id: 'password',
-              placeholder: 'Exemplo0Ab#',
-              value: userData.password,
-              onChange: handlePasswordChange,
+            {
+              input: {
+                type: 'password',
+                name: 'confirm-password',
+                id: 'confirm-password',
+                placeholder: 'Exemplo0Ab#',
+                value: userData.confirmPassword,
+                onChange: handleConfirmPasswordChange,
+              },
+              label: {
+                content: 'Confirmar Senha',
+                htmlFor: 'confirm-password',
+              },
             },
-            label: {
-              content: 'Senha',
-              htmlFor: 'password',
-            },
-          },
-          {
-            input: {
-              type: 'password',
-              name: 'confirm-password',
-              id: 'confirm-password',
-              placeholder: 'Exemplo0Ab#',
-              value: userData.confirmPassword,
-              onChange: handleConfirmPasswordChange,
-            },
-            label: {
-              content: 'Confirmar Senha',
-              htmlFor: 'confirm-password',
-            },
-          },
-        ]}
-        onSubmitAction={handleSubmitForm}
-        submitBtnContent="Cadastrar-se"
-      />
+          ]}
+          onSubmitAction={handleSubmitForm}
+          submitBtnContent="Cadastrar-se"
+        />
+      </CardSection>
     </Container>
   );
 }

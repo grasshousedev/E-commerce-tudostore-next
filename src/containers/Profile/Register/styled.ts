@@ -8,7 +8,7 @@ export const Container = styled.main`
   align-items: center;
   gap: 2rem;
 
-  header {
+  & > header {
     width: 80%;
     align-self: center;
 

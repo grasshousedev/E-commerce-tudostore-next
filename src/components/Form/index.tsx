@@ -4,7 +4,7 @@ import { IoLockClosed } from 'react-icons/io5';
 
 import Button from '../Button';
 
-import { Container, FormContainer } from './styled';
+import { FormContainer, Footer } from './styled';
 
 export type fieldProtocol = {
   input: {
@@ -22,10 +22,9 @@ export type fieldProtocol = {
 };
 
 export type FormProps = {
-  title: string;
   fields: fieldProtocol[];
   onSubmitAction: (e: FormEvent<HTMLFormElement>, ...args: unknown[]) => void;
-  submitBtnContent: string;
+  submitBtnContent: React.ReactNode;
   footer?: {
     backButton: {
       onClick: () => void;
@@ -34,10 +33,9 @@ export type FormProps = {
   };
 };
 
-export default function Form({ title, fields, onSubmitAction, submitBtnContent, footer }: FormProps) {
+export default function Form({ fields, onSubmitAction, submitBtnContent, footer }: FormProps) {
   return (
-    <Container>
-      {title && <header dangerouslySetInnerHTML={{ __html: title }}></header>}
+    <>
       <FormContainer onSubmit={onSubmitAction}>
         {fields && (
           <div className="container-inputs">
@@ -55,7 +53,7 @@ export default function Form({ title, fields, onSubmitAction, submitBtnContent, 
         </div>
       </FormContainer>
       {footer && (
-        <div className="container-footer">
+        <Footer>
           <button type="button" onClick={footer.backButton.onClick}>
             {footer.backButton.content}
           </button>
@@ -63,8 +61,8 @@ export default function Form({ title, fields, onSubmitAction, submitBtnContent, 
             <IoLockClosed />
             <span>Conexão Segura</span>
           </span>
-        </div>
+        </Footer>
       )}
-    </Container>
+    </>
   );
 }
