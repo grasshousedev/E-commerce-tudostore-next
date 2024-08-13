@@ -12,16 +12,28 @@ export type UserProtocol = {
   userImage: string;
 };
 
+export type UserCardProtocol = {
+  cardName: string;
+  cardNumbers: string;
+  cvc: number;
+  expDate: string;
+  isDefault: boolean;
+};
+
 export type ContextType = {
   user: UserProtocol;
+  cards: UserCardProtocol[];
+  setCards: React.Dispatch<React.SetStateAction<UserCardProtocol[]>>;
   setUser: React.Dispatch<React.SetStateAction<UserProtocol>>;
-  userLSLoaded: boolean;
+  LSLoaded: boolean;
 };
 
 const defaultContextValue: ContextType = {
   user: { isLoggedIn: false, name: '', email: '', password: '', userImage: '' },
+  cards: [],
+  setCards: () => {},
   setUser: () => {},
-  userLSLoaded: false,
+  LSLoaded: false,
 };
 
 const Context = createContext<ContextType>(defaultContextValue);
@@ -32,10 +44,14 @@ export type UserProviderProps = {
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProtocol>(defaultContextValue.user);
-  const [userLSLoaded, setLSLoaded] = useState(false);
+  const [cards, setCards] = useState<UserCardProtocol[]>([]);
+  const [LSLoaded, setLSLoaded] = useState(false);
+
+  const [canSetCards, setCanSetCards] = useState(false);
 
   useEffect(() => {
     setUser(getLSItem('user') || user);
+    setCards(getLSItem('cards') || []);
     setLSLoaded(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -59,10 +75,39 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, [user]);
 
   useEffect(() => {
+    const validateCards = (arr: UserCardProtocol[]) => {
+      return (
+        Array.isArray(arr) &&
+        arr.every((card) => {
+          return (
+            card &&
+            typeof card === 'object' &&
+            typeof card.cardName === 'string' &&
+            typeof card.cardNumbers === 'string' &&
+            typeof card.cvc === 'number' &&
+            typeof card.expDate === 'string' &&
+            typeof card.isDefault === 'boolean'
+          );
+        })
+      );
+    };
+
+    validateCards(cards) && setCards(defaultContextValue.cards);
+  }, [cards]);
+
+  useEffect(() => {
+    if (user.isLoggedIn) setCanSetCards(true);
+  }, [user]);
+
+  useEffect(() => {
     setLSItem('user', user);
   }, [user]);
 
-  return <Context.Provider value={{ user, setUser, userLSLoaded }}>{children}</Context.Provider>;
+  useEffect(() => {
+    if (canSetCards) setLSItem('cards', cards);
+  }, [canSetCards, cards]);
+
+  return <Context.Provider value={{ user, setUser, cards, setCards, LSLoaded }}>{children}</Context.Provider>;
 };
 
 export function useUserContext() {

@@ -7,11 +7,11 @@ import { Container } from './styled';
 export default function Checkout() {
   const router = useRouter();
 
-  const { user, userLSLoaded } = useUserContext();
+  const { user, LSLoaded } = useUserContext();
 
-  if (userLSLoaded && !user.isLoggedIn) {
+  if (LSLoaded && !user.isLoggedIn) {
     router.push(`/profile?redirect=${encodeURIComponent('/checkout')}`);
   }
 
-  return userLSLoaded && user.isLoggedIn && <Container>CHECKOUT</Container>;
+  return LSLoaded && user.isLoggedIn && <Container>CHECKOUT</Container>;
 }

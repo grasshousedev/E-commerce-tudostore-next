@@ -10,7 +10,7 @@ import Button from '../../../components/Button';
 import { Container, Cards, Card } from './styled';
 
 const UserCard = () => {
-  const { user, setUser, userLSLoaded } = useUserContext();
+  const { user, setUser, LSLoaded } = useUserContext();
   const { userImage } = user;
 
   const [newImage, setNewImage] = useState('');
@@ -42,7 +42,7 @@ const UserCard = () => {
   };
 
   return (
-    userLSLoaded && (
+    LSLoaded && (
       <Card>
         <header>
           <h2 className="title-all-uppercase-spaced">Minhas informações</h2>
