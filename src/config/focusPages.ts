@@ -1,3 +1,4 @@
 export const focusPages = {
-  bagComponent: ['/profile', '/checkout'],
+  bagComponent: ['/profile', '/profile/cards', '/checkout'],
+  menuComponent: ['/profile/cards'],
 };

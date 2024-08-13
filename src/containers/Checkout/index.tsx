@@ -8,9 +8,9 @@ export default function Checkout() {
 
   const { isClosed, LSLoaded } = useClosedPage();
 
-  if (LSLoaded && !isClosed) {
+  if (LSLoaded && isClosed) {
     router.push(`/profile?redirect=${encodeURIComponent('/checkout')}`);
   }
 
-  return LSLoaded && isClosed && <Container>CHECKOUT</Container>;
+  return LSLoaded && !isClosed && <Container>CHECKOUT</Container>;
 }
