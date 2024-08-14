@@ -31,6 +31,10 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 16px;
     font-family: 'Cabin', sans-serif;
   }
+
+  input[type=date] {
+    font-family: 'Cabin', sans-serif;
+  }
 `;
 
 export const LayoutWrapper = styled.div`

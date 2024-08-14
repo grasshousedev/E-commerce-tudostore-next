@@ -5,9 +5,10 @@ import { useUserContext } from '../../contexts/user';
 
 import { creditCardType } from '../../utils/checkCreditCard';
 
+import Form from '../../components/Form';
+
 import { CardSection, ContainerCardBottom } from '../../styles/card';
 import { Container } from './styled';
-import Form from '../../components/Form';
 
 const SelectCard = () => {
   const { cards } = useUserContext();
@@ -71,10 +72,11 @@ const AddNewCard = () => {
           },
           {
             input: {
+              className: 'grey-placeholder pdg-l',
               type: 'text',
               name: 'card-number',
               id: 'card-number',
-              placeholder: '5126-5987-2214-7621',
+              placeholder: '💳  5126-5987-2214-7621',
               value: '',
               onChange: () => {},
             },
@@ -85,16 +87,28 @@ const AddNewCard = () => {
           },
           {
             input: {
-              type: 'password',
-              name: 'confirm-password',
-              id: 'confirm-password',
+              type: 'date',
+              name: 'expiry-date',
+              id: 'expiry-date',
               placeholder: 'Exemplo0Ab#',
               value: '',
               onChange: () => {},
             },
             label: {
-              content: 'Confirmar Senha',
-              htmlFor: 'confirm-password',
+              content: 'Data de validade',
+              htmlFor: 'expiry-date',
+            },
+            input2: {
+              type: 'number',
+              name: 'cvc',
+              id: 'cvc',
+              placeholder: '123',
+              value: '',
+              onChange: () => {},
+            },
+            label2: {
+              content: 'CVC',
+              htmlFor: 'cvc',
             },
           },
         ]}

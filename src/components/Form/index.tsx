@@ -8,6 +8,7 @@ import { FormContainer, Footer } from './styled';
 
 export type fieldProtocol = {
   input: {
+    className?: string;
     type: string;
     name: string;
     id: string;
@@ -16,6 +17,19 @@ export type fieldProtocol = {
     onChange: React.ChangeEventHandler<HTMLInputElement>;
   };
   label: {
+    content: string;
+    htmlFor: string;
+  };
+  input2?: {
+    className?: string;
+    type: string;
+    name: string;
+    id: string;
+    placeholder: string;
+    value: string;
+    onChange: React.ChangeEventHandler<HTMLInputElement>;
+  };
+  label2?: {
     content: string;
     htmlFor: string;
   };
@@ -39,13 +53,28 @@ export default function Form({ fields, onSubmitAction, submitBtnContent, footer 
       <FormContainer onSubmit={onSubmitAction}>
         {fields && (
           <div className="container-inputs">
-            {fields.map((field, i) => (
-              <div className="container-input" key={i}>
-                <label htmlFor={field.input.id}>{field.label.content}</label>
-                <input {...field.input} />
-                <div className="container-tips"></div>
-              </div>
-            ))}
+            {fields.map((field, i) =>
+              field.input2 && field.label2 ? (
+                <div className="container-input-2-row" key={i}>
+                  <div className="container-input" key={i}>
+                    <label htmlFor={field.input.id}>{field.label.content}</label>
+                    <input {...field.input} />
+                    <div className="container-tips"></div>
+                  </div>
+                  <div className="container-input" key={i}>
+                    <label htmlFor={field.input2.id}>{field.label2.content}</label>
+                    <input {...field.input2} />
+                    <div className="container-tips"></div>
+                  </div>
+                </div>
+              ) : (
+                <div className="container-input" key={i}>
+                  <label htmlFor={field.input.id}>{field.label.content}</label>
+                  <input {...field.input} />
+                  <div className="container-tips"></div>
+                </div>
+              ),
+            )}
           </div>
         )}
         <div className="container-submit">

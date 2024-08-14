@@ -28,6 +28,15 @@ export const FormContainer = styled.form`
           background-color: ${theme.colors.white};
           border-radius: 0.813rem;
           box-shadow: 0 4px 16px ${theme.colors.placeholder}26;
+          color: ${theme.colors.dark};
+
+          &[type='date'] {
+            color: ${theme.colors.placeholder}80;
+          }
+
+          &.grey-placeholder::placeholder {
+            filter: grayscale(100%);
+          }
         }
 
         .container-tips {
@@ -41,6 +50,12 @@ export const FormContainer = styled.form`
           }
         }
       `}
+    }
+
+    .container-input-2-row {
+      display: grid;
+      grid-template-columns: 35% 25% 25%;
+      gap: 2rem;
     }
   }
 
