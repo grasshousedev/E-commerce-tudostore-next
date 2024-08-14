@@ -14,9 +14,9 @@ export type UserProtocol = {
 
 export type UserCardProtocol = {
   cardName: string;
-  cardNumbers: string;
-  cvc: number;
-  expDate: string;
+  cardNumber: string;
+  cvc: string;
+  expiryDate: string;
   isDefault: boolean;
 };
 
@@ -83,16 +83,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             card &&
             typeof card === 'object' &&
             typeof card.cardName === 'string' &&
-            typeof card.cardNumbers === 'string' &&
-            typeof card.cvc === 'number' &&
-            typeof card.expDate === 'string' &&
+            typeof card.cardNumber === 'string' &&
+            typeof card.cvc === 'string' &&
+            typeof card.expiryDate === 'string' &&
             typeof card.isDefault === 'boolean'
           );
         })
       );
     };
 
-    validateCards(cards) && setCards(defaultContextValue.cards);
+    !validateCards(cards) && setCards(defaultContextValue.cards);
   }, [cards]);
 
   useEffect(() => {

@@ -105,9 +105,9 @@ const UserCardsCard = () => {
                     <div className="card-info">
                       <IoCard />
                       <span>
-                        {creditCardType(card.cardNumbers)} terminando com{' '}
+                        {creditCardType(card.cardNumber)} terminando com{' '}
                         <span>
-                          {card.cardNumbers.slice(card.cardNumbers.length - 4, card.cardNumbers.length)}
+                          {card.cardNumber.slice(card.cardNumber.length - 4, card.cardNumber.length)}
                         </span>
                       </span>
                     </div>
