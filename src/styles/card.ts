@@ -117,11 +117,15 @@ export const ContainerCardBottom = styled.div`
     gap: 0.5rem;
     padding: 0.5rem;
 
+    &.w-100 {
+      width: 100%;
+    }
+
     div {
       font-size: inherit;
     }
 
-    span:not(span.accent-color) {
+    span:not(span.accent-color):not(span.plchldr) {
       font-size: inherit;
       color: ${({ theme }) => theme.colors.dark};
     }

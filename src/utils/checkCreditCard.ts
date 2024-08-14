@@ -35,5 +35,5 @@ export const creditCardType = (cc: string) => {
   if (cup1.test(cc) || cup2.test(cc)) {
     return 'CHINA_UNION_PAY';
   }
-  return undefined;
+  return 'Cartão';
 };

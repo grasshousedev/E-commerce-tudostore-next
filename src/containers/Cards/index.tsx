@@ -1,7 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { IoCard } from 'react-icons/io5';
-import { useClosedPage } from '../../hooks/closedPage';
+import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
 import toast from 'react-hot-toast';
+
+import { useClosedPage } from '../../hooks/closedPage';
 
 import { UserCardProtocol, useUserContext } from '../../contexts/user';
 
@@ -16,10 +18,16 @@ import { toastArrayRun } from '../../utils/runToastArray';
 import Form from '../../components/Form';
 
 import { CardSection, ContainerCardBottom } from '../../styles/card';
-import { Container } from './styled';
+import { Container, ContainerCard } from './styled';
 
 const SelectCard = () => {
-  const { cards } = useUserContext();
+  const { cards, setCards } = useUserContext();
+
+  const handleSelectADefaultCard = (cardNumber: string) => {
+    setCards(cards.map((card) => ({ ...card, isDefault: card.cardNumber === cardNumber })));
+  };
+
+  console.log(cards);
 
   return (
     <CardSection>
@@ -27,24 +35,24 @@ const SelectCard = () => {
         <h1 className="title-all-uppercase-spaced">Selecione um cartão</h1>
       </header>
       <ContainerCardBottom>
-        <div className="container-left">
+        <div className="container-left w-100">
           {cards.length > 0 ? (
-            cards.map(
-              (card, i) =>
-                card.isDefault && (
-                  <div key={i}>
-                    <div className="card-info">
-                      <IoCard />
-                      <span>
-                        {creditCardType(card.cardNumber)} terminando com{' '}
-                        <span>
-                          {card.cardNumber.slice(card.cardNumber.length - 4, card.cardNumber.length)}
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                ),
-            )
+            cards.map((card, i) => (
+              <ContainerCard key={i} onClick={() => handleSelectADefaultCard(card.cardNumber)}>
+                <div>
+                  <IoCard />
+                  <span className="plchldr">
+                    {creditCardType(card.cardNumber)} terminando com{' '}
+                    <span className="plchldr">
+                      {card.cardNumber.slice(card.cardNumber.length - 4, card.cardNumber.length)}
+                    </span>
+                  </span>
+                </div>
+                <div className="check" onClick={() => handleSelectADefaultCard(card.cardNumber)}>
+                  {card.isDefault ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />}
+                </div>
+              </ContainerCard>
+            ))
           ) : (
             <div className="empty">
               <p>Parece que você não tem nenhum cartão cadastrado, adicione um novo cartão</p>
