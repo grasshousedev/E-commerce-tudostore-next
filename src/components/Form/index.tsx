@@ -56,19 +56,19 @@ export default function Form({ fields, onSubmitAction, submitBtnContent, footer 
             {fields.map((field, i) =>
               field.input2 && field.label2 ? (
                 <div className="container-input-2-row" key={i}>
-                  <div className="container-input" key={i}>
+                  <div className="container-input" key={field.input.id}>
                     <label htmlFor={field.input.id}>{field.label.content}</label>
                     <input {...field.input} />
                     <div className="container-tips"></div>
                   </div>
-                  <div className="container-input" key={i}>
+                  <div className="container-input" key={field.input2.id}>
                     <label htmlFor={field.input2.id}>{field.label2.content}</label>
                     <input {...field.input2} />
                     <div className="container-tips"></div>
                   </div>
                 </div>
               ) : (
-                <div className="container-input" key={i}>
+                <div className="container-input" key={field.input.id}>
                   <label htmlFor={field.input.id}>{field.label.content}</label>
                   <input {...field.input} />
                   <div className="container-tips"></div>
