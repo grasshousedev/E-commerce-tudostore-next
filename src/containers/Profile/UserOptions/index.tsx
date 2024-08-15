@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { FaUser, FaEdit, FaCheckCircle } from 'react-icons/fa';
+import { FaUser, FaEdit, FaCheckCircle, FaAddressCard } from 'react-icons/fa';
 import { IoCard } from 'react-icons/io5';
 import { isURL } from 'validator';
 import toast from 'react-hot-toast';
@@ -11,7 +11,7 @@ import { creditCardType } from '../../../utils/checkCreditCard';
 import Button from '../../../components/Button';
 
 import { Card, ContainerCardBottom } from '../../../styles/card';
-import { Container, Cards } from './styled';
+import { Container, Cards, ContainerCard } from './styled';
 
 const UserCard = () => {
   const { user, setUser, LSLoaded } = useUserContext();
@@ -86,9 +86,7 @@ const UserCard = () => {
 };
 
 const UserCardsCard = () => {
-  const { cards, LSLoaded } = useUserContext();
-
-  console.log(LSLoaded, cards);
+  const { cards } = useUserContext();
 
   return (
     <Card>
@@ -101,8 +99,12 @@ const UserCardsCard = () => {
             cards.map(
               (card, i) =>
                 card.isDefault && (
-                  <div key={i}>
-                    <div className="card-info">
+                  <ContainerCard key={i}>
+                    <div>
+                      <FaAddressCard />
+                      <span className="no-wrap">Nome: {card.cardName}</span>
+                    </div>
+                    <div>
                       <IoCard />
                       <span>
                         {creditCardType(card.cardNumber)} terminando com{' '}
@@ -111,7 +113,7 @@ const UserCardsCard = () => {
                         </span>
                       </span>
                     </div>
-                  </div>
+                  </ContainerCard>
                 ),
             )
           ) : (
