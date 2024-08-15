@@ -27,8 +27,6 @@ const SelectCard = () => {
     setCards(cards.map((card) => ({ ...card, isDefault: card.cardNumber === cardNumber })));
   };
 
-  console.log(cards);
-
   return (
     <CardSection>
       <header>
@@ -71,6 +69,7 @@ const AddNewCard = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [CVCValue, setCVCValue] = useState('');
+  const [newDefaultCard, setNewDefaultCard] = useState(true);
 
   const handleChangeCardName = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -149,6 +148,10 @@ const AddNewCard = () => {
     tips.innerHTML = '';
   };
 
+  const handleChangeDefaultCard = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewDefaultCard(e.target.checked);
+  };
+
   const cardIsAlreadyIn = (newCardNumber: string) => {
     return cards.some((card) => card.cardNumber === newCardNumber);
   };
@@ -178,7 +181,7 @@ const AddNewCard = () => {
       cardNumber,
       cvc: CVCValue,
       expiryDate,
-      isDefault: false,
+      isDefault: newDefaultCard,
     };
 
     if (cardIsAlreadyIn(newCard.cardNumber)) {
@@ -187,7 +190,11 @@ const AddNewCard = () => {
       return;
     }
 
-    setCards([...cards, newCard]);
+    if (newDefaultCard) {
+      setCards([...cards.map((card) => ({ ...card, isDefault: false })), newCard]);
+    } else {
+      setCards([...cards, newCard]);
+    }
     toast.success('Cartão adicionado com sucesso');
     setCardName('');
     setCardNumber('');
@@ -255,6 +262,20 @@ const AddNewCard = () => {
             label2: {
               content: 'CVC',
               htmlFor: 'cvc',
+            },
+          },
+          {
+            input: {
+              className: 'grey-placeholder pdg-l',
+              type: 'checkbox',
+              name: 'default-card',
+              id: 'default-card',
+              checked: newDefaultCard,
+              onChange: handleChangeDefaultCard,
+            },
+            label: {
+              content: 'Salvar como método de pagamento padrão',
+              htmlFor: 'default-card',
             },
           },
         ]}

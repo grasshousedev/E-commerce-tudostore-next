@@ -57,6 +57,24 @@ export const FormContainer = styled.form`
       grid-template-columns: 35% 25% 25%;
       gap: 2rem;
     }
+
+    .container-input-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      label {
+        ${({ theme }) => css`
+          font-size: ${theme.fontSizes.l6};
+        `}
+      }
+
+      input[type='checkbox'] {
+        margin-right: 0.25rem;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
   }
 
   .container-submit {

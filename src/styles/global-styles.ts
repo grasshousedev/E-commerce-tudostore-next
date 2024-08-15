@@ -35,6 +35,12 @@ export const GlobalStyles = createGlobalStyle`
   input[type=date] {
     font-family: 'Cabin', sans-serif;
   }
+
+  input[type=checkbox] {
+    &:checked {
+      accent-color: ${({ theme }) => theme.colors.accent[1]};
+    }
+  }
 `;
 
 export const LayoutWrapper = styled.div`
