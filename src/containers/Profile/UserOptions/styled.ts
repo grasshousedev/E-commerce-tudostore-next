@@ -35,6 +35,10 @@ export const Cards = styled.section`
 export const ContainerCard = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.l6};
 
+  & > div + div {
+    margin-top: 0.5rem;
+  }
+
   div {
     display: flex;
     gap: 0.5rem;
