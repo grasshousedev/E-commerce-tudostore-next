@@ -4,10 +4,16 @@ import { css } from 'styled-components';
 export const Container = styled.main`
   margin-inline: auto;
   margin-bottom: 2rem;
-  max-width: 676px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 
-  section ~ section {
-    margin-top: 2rem;
+  & > section {
+    max-width: 676px;
+    width: 100%;
   }
 `;
 
