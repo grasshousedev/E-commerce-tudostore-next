@@ -20,9 +20,19 @@ export type UserCardProtocol = {
   isDefault: boolean;
 };
 
+export type UserAddressProtocol = {
+  shippingName: string;
+  streetName: string;
+  cityName: string;
+  stateName: string;
+  countryName: string;
+};
+
 export type ContextType = {
   user: UserProtocol;
   cards: UserCardProtocol[];
+  address: UserAddressProtocol;
+  setAddress: React.Dispatch<React.SetStateAction<UserAddressProtocol>>;
   setCards: React.Dispatch<React.SetStateAction<UserCardProtocol[]>>;
   setUser: React.Dispatch<React.SetStateAction<UserProtocol>>;
   LSLoaded: boolean;
@@ -31,6 +41,14 @@ export type ContextType = {
 const defaultContextValue: ContextType = {
   user: { isLoggedIn: false, name: '', email: '', password: '', userImage: '' },
   cards: [],
+  address: {
+    shippingName: '',
+    streetName: '',
+    cityName: '',
+    stateName: '',
+    countryName: '',
+  },
+  setAddress: () => {},
   setCards: () => {},
   setUser: () => {},
   LSLoaded: false,
@@ -45,13 +63,15 @@ export type UserProviderProps = {
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserProtocol>(defaultContextValue.user);
   const [cards, setCards] = useState<UserCardProtocol[]>([]);
+  const [address, setAddress] = useState<UserAddressProtocol>(defaultContextValue.address);
   const [LSLoaded, setLSLoaded] = useState(false);
 
-  const [canSetCards, setCanSetCards] = useState(false);
+  const [canSetAditionals, setCanSetAditionals] = useState(false);
 
   useEffect(() => {
     setUser(getLSItem('user') || user);
     setCards(getLSItem('cards') || []);
+    setAddress(getLSItem('address') || address);
     setLSLoaded(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -96,7 +116,23 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, [cards]);
 
   useEffect(() => {
-    if (user.isLoggedIn) setCanSetCards(true);
+    const validateAddress = (obj: UserAddressProtocol) => {
+      return (
+        obj &&
+        typeof obj === 'object' &&
+        typeof obj.shippingName === 'string' &&
+        typeof obj.streetName === 'string' &&
+        typeof obj.cityName === 'string' &&
+        typeof obj.stateName === 'string' &&
+        typeof obj.countryName === 'string'
+      );
+    };
+
+    !validateAddress(address) && setAddress(defaultContextValue.address);
+  }, [address]);
+
+  useEffect(() => {
+    if (user.isLoggedIn) setCanSetAditionals(true);
   }, [user]);
 
   useEffect(() => {
@@ -104,10 +140,18 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, [user]);
 
   useEffect(() => {
-    if (canSetCards) setLSItem('cards', cards);
-  }, [canSetCards, cards]);
+    if (canSetAditionals) setLSItem('cards', cards);
+  }, [canSetAditionals, cards]);
 
-  return <Context.Provider value={{ user, setUser, cards, setCards, LSLoaded }}>{children}</Context.Provider>;
+  useEffect(() => {
+    if (canSetAditionals) setLSItem('address', address);
+  }, [canSetAditionals, address]);
+
+  return (
+    <Context.Provider value={{ user, setUser, cards, setCards, address, setAddress, LSLoaded }}>
+      {children}
+    </Context.Provider>
+  );
 };
 
 export function useUserContext() {
