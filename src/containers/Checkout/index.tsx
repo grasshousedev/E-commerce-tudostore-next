@@ -1,19 +1,49 @@
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { IoIosArrowBack } from 'react-icons/io';
+
+import { useBagContext } from '../../contexts/bag';
+
 import { useClosedPage } from '../../hooks/closedPage';
+
+import { convertToBRL } from '../../utils/convertPriceBRL';
 
 import AddressCard from '../../components/AddressCard';
 import CardCard from '../../components/CardCard';
-
-import { Container, ContainerResume } from './styled';
 import Button from '../../components/Button';
-import { useBagContext } from '../../contexts/bag';
+
+import { Container, ContainerResume, ContainerOrderInfos, ContainerOrderTotal } from './styled';
 
 export default function Checkout() {
-  const { isClosed, LSLoaded } = useClosedPage('/checkout');
-  const { bagItems } = useBagContext();
+  const router = useRouter();
 
-  console.log(bagItems);
+  const { isClosed, LSLoaded } = useClosedPage('/checkout');
+  const { bagTotal, bagData, LSLoaded: BagLSLoaded, bagItems } = useBagContext();
+
+  const [total, setTotal] = useState(0);
+
+  const shippingCost = parseFloat((Math.random() * 300).toFixed(2));
+  const taxService = parseFloat((Math.random() * 30).toFixed(2));
+
+  useEffect(() => {
+    if (bagData.length > 0) {
+      setTotal(bagTotal + shippingCost + taxService);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bagTotal, bagData]);
+
+  useEffect(() => {
+    if (BagLSLoaded && bagItems.length === 0) {
+      router.push('/');
+      toast.dismiss();
+      toast('Você não tem items no seu carrinho para fazer checkout');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [BagLSLoaded, bagItems]);
 
   return (
+    bagData.length > 0 &&
     LSLoaded &&
     !isClosed && (
       <Container>
@@ -26,12 +56,26 @@ export default function Checkout() {
             <header>
               <h1>Resumo da Ordem</h1>
             </header>
-            <div className="order-infos">
-              <span></span>
-            </div>
-            <div className="order-total">Total: {}</div>
+            <ContainerOrderInfos>
+              <div>
+                <span>Items:</span> <span>{convertToBRL(bagTotal)}</span>
+              </div>
+              <div>
+                <span>Envio:</span> <span>{convertToBRL(shippingCost)}</span>
+              </div>
+              <div>
+                <span>Taxa Serviço:</span> <span>{convertToBRL(taxService)}</span>
+              </div>
+            </ContainerOrderInfos>
+            <ContainerOrderTotal>
+              <span>Total:</span> <span>{convertToBRL(total)}</span>
+            </ContainerOrderTotal>
             <Button>Finalizar Ordem</Button>
           </ContainerResume>
+          <Button className="outline" onClick={() => history.back()}>
+            <IoIosArrowBack />
+            <span>Voltar</span>
+          </Button>
         </section>
       </Container>
     )

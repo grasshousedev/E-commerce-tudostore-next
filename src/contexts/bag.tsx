@@ -31,7 +31,7 @@ export type ContextType = {
   setBagItems: React.Dispatch<React.SetStateAction<BagItemProtocol[]>>;
   bagTotal: number;
   bagData: BagItemDataProtocol[];
-  runnedFuncRequest: boolean;
+  LSLoaded: boolean;
 };
 
 const defaultContextValue: ContextType = {
@@ -39,7 +39,7 @@ const defaultContextValue: ContextType = {
   setBagItems: () => {},
   bagTotal: 0,
   bagData: [],
-  runnedFuncRequest: false,
+  LSLoaded: false,
 };
 
 const Context = createContext<ContextType>(defaultContextValue);
@@ -52,12 +52,14 @@ export const BagProvider = ({ children }: BagProviderProps) => {
   const [bagItems, setBagItems] = useState<BagItemProtocol[]>(defaultContextValue.bagItems);
   const [bagTotal, setBagTotal] = useState<number>(defaultContextValue.bagTotal);
   const [bagData, setBagData] = useState<BagItemDataProtocol[]>(defaultContextValue.bagData);
-  const [runnedFuncRequest, setRunnedFuncRequest] = useState(defaultContextValue.runnedFuncRequest);
+  const [LSLoaded, setLSLoaded] = useState(defaultContextValue.LSLoaded);
 
   const [canRequest, setCanRequest] = useState(true);
+  const [runnedFuncRequest, setRunnedFuncRequest] = useState(false);
 
   useEffect(() => {
     setBagItems(getLSItem('bag') || []);
+    setLSLoaded(true);
   }, []);
 
   useEffect(() => {
@@ -88,7 +90,6 @@ export const BagProvider = ({ children }: BagProviderProps) => {
   }, [bagItems]);
 
   const requestBagData = async () => {
-    setRunnedFuncRequest(true);
     if (bagItems.length === 0) return;
     const items: BagItemDataProtocol[] = [];
     for (let i = 0; i < bagItems.length; i++) {
@@ -118,6 +119,7 @@ export const BagProvider = ({ children }: BagProviderProps) => {
       }
     }
     setBagData(items);
+    setRunnedFuncRequest(true);
   };
 
   useEffect(() => {
@@ -137,7 +139,7 @@ export const BagProvider = ({ children }: BagProviderProps) => {
   }, [bagData]);
 
   return (
-    <Context.Provider value={{ bagItems, setBagItems, bagTotal, bagData, runnedFuncRequest }}>
+    <Context.Provider value={{ bagItems, setBagItems, bagTotal, bagData, LSLoaded }}>
       {children}
     </Context.Provider>
   );

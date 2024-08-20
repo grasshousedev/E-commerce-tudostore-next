@@ -73,11 +73,11 @@ const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }
 };
 
 const ContainerBagItems = () => {
-  const { bagItems, bagData, runnedFuncRequest } = useBagContext();
+  const { bagItems, bagData, LSLoaded } = useBagContext();
 
   return (
     <>
-      <BagItems className={runnedFuncRequest && bagItems.length === 0 ? 'hide' : ''}>
+      <BagItems className={LSLoaded && bagItems.length === 0 ? 'hide' : ''}>
         {bagData.length > 0 &&
           bagData.map((item) => (
             <ContainerBagItem
@@ -94,7 +94,7 @@ const ContainerBagItems = () => {
         {bagData.length === 0 &&
           bagItems.map((_, i) => <BagItemAnimated key={i} className="load-animation" />)}
       </BagItems>
-      {runnedFuncRequest && bagItems.length === 0 && (
+      {LSLoaded && bagItems.length === 0 && (
         <ContainerEmpty>
           <h2>Parece que sua bolsa está vázia</h2>
           <p>
