@@ -10,11 +10,15 @@ import Button from '../Button';
 import { Card, ContainerCardBottom } from '../../styles/card';
 import { ContainerCard } from './styled';
 
-export default function CardCard() {
+export type CardCardProps = {
+  className?: string;
+};
+
+export default function CardCard({ className }: CardCardProps) {
   const { cards } = useUserContext();
 
   return (
-    <Card>
+    <Card className={className}>
       <header>
         <h2 className="title-all-uppercase-spaced">Método de pagamento</h2>
       </header>

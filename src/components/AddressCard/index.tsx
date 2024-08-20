@@ -5,11 +5,15 @@ import { useUserContext } from '../../contexts/user';
 import { Card, ContainerCardBottom } from '../../styles/card';
 import { ContainerAddress } from './styled';
 
-export default function AddressCard() {
+export type AddressCardProps = {
+  className?: string;
+};
+
+export default function AddressCard({ className }: AddressCardProps) {
   const { address } = useUserContext();
 
   return (
-    <Card>
+    <Card className={className}>
       <header>
         <h2 className="title-all-uppercase-spaced">Endereço de envio</h2>
       </header>

@@ -9,6 +9,10 @@ const cardStyle = css`
   flex-direction: column;
   gap: 1rem;
 
+  &.m-border-radius {
+    border-radius: 0.813rem;
+  }
+
   &.m-padding {
     padding: 2rem;
   }

@@ -1,35 +1,16 @@
 import Image from 'next/image';
 
-import { useEffect, useState } from 'react';
-
 import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 
-import { useBagContext } from '../../contexts/bag';
+import { BagItemDataProtocol, useBagContext } from '../../contexts/bag';
 
 import Button from '../../components/Button';
 
-import { jsonFetch } from '../../utils/jsonFetch';
 import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
 import { convertNumberDecimals } from '../../utils/convertNumberDecimals';
 
 import { Container, BagItems, BagItem, BagItemAnimated, ContainerEmpty } from './styled';
-
-export type BagItemDataProtocol = {
-  id: number;
-  repeat: number;
-  thumbnail: string;
-  title: string;
-  rating: number;
-  brand: string;
-  price: number;
-};
-
-export type BagItemDataResponse = {
-  rating: number;
-  brand: string;
-  price: number;
-};
 
 const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItemDataProtocol) => {
   const { bagItems, setBagItems } = useBagContext();
@@ -92,75 +73,7 @@ const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }
 };
 
 const ContainerBagItems = () => {
-  const [bagData, setBagData] = useState<BagItemDataProtocol[]>([]);
-  const [itemsFirstRequest, setItemsFirstRequest] = useState(false);
-  const [runnedFuncRequest, setRunnedFuncRequest] = useState(false);
-  const { bagItems, setBagItems, setBagTotal } = useBagContext();
-
-  useEffect(() => {
-    if (bagItems.length < bagData.length) {
-      const items = bagData.filter((item) => {
-        if (bagItems.findIndex((iItem) => iItem.id === item.id) !== -1) {
-          return true;
-        }
-        return false;
-      });
-      setBagData(items);
-    } else if (bagItems.length === bagData.length) {
-      const items = bagData.map((item, i) => {
-        item.repeat = bagItems[i].repeat;
-        return item;
-      });
-      setBagData(items);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bagItems]);
-
-  useEffect(() => {
-    const requestBagData = async () => {
-      setRunnedFuncRequest(true);
-      if (bagItems.length === 0) return;
-      const items: BagItemDataProtocol[] = [];
-      for (let i = 0; i < bagItems.length; i++) {
-        try {
-          const { response, json: data }: { response: Response; json: BagItemDataResponse } = await jsonFetch(
-            `https://dummyjson.com/products/${encodeURIComponent(bagItems[i].id)}`,
-            'select=rating,brand,price',
-            true,
-          );
-          if (response.status === 200) {
-            items.push({
-              id: bagItems[i].id,
-              repeat: bagItems[i].repeat,
-              thumbnail: bagItems[i].thumbnail,
-              title: bagItems[i].title,
-              rating: data.rating,
-              brand: data.brand,
-              price: data.price,
-            });
-          } else if (response.status === 404) {
-            console.error(`Product not found: ${bagItems[i].id}`);
-            setBagItems(bagItems.filter((item) => item.id !== bagItems[i].id));
-          }
-        } catch (err) {
-          console.error('Error fetching data:', err);
-          return;
-        }
-      }
-      setBagData(items);
-      setItemsFirstRequest(true);
-    };
-
-    if (itemsFirstRequest) return;
-    requestBagData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bagItems]);
-
-  useEffect(() => {
-    const total = bagData.reduce((acc, item) => acc + item.price * item.repeat, 0);
-    setBagTotal(total);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bagData]);
+  const { bagItems, bagData, runnedFuncRequest } = useBagContext();
 
   return (
     <>
