@@ -4,6 +4,7 @@ const cardStyle = css`
   border-radius: 1.313rem;
   background-color: ${({ theme }) => theme.colors.white};
   padding: 1rem;
+  border: 0px solid transparent;
 
   display: flex;
   flex-direction: column;
@@ -15,6 +16,12 @@ const cardStyle = css`
 
   &.m-padding {
     padding: 2rem;
+  }
+
+  &.error {
+    transition: 0.3s border ease-out;
+    border: 1px solid ${({ theme }) => theme.colors.warnColors.danger};
+    padding: calc(1rem - 1px);
   }
 
   header {
