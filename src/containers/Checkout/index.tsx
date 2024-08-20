@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { IoIosArrowBack } from 'react-icons/io';
 
@@ -22,9 +22,8 @@ export default function Checkout() {
   const { bagTotal, bagData, LSLoaded: BagLSLoaded, bagItems } = useBagContext();
 
   const [total, setTotal] = useState(0);
-
-  const shippingCost = parseFloat((Math.random() * 300).toFixed(2));
-  const taxService = parseFloat((Math.random() * 30).toFixed(2));
+  const shippingCost = useMemo(() => parseFloat((Math.random() * 300).toFixed(2)), []);
+  const taxService = useMemo(() => parseFloat((Math.random() * 30).toFixed(2)), []);
 
   useEffect(() => {
     if (bagData.length > 0) {
