@@ -1,17 +1,16 @@
 import { ChangeEvent, useState } from 'react';
-import { FaUser, FaEdit, FaCheckCircle, FaAddressCard } from 'react-icons/fa';
-import { IoCard } from 'react-icons/io5';
+import { FaUser, FaEdit, FaCheckCircle } from 'react-icons/fa';
 import { isURL } from 'validator';
 import toast from 'react-hot-toast';
 
 import { useUserContext } from '../../../contexts/user';
 
-import { creditCardType } from '../../../utils/checkCreditCard';
-
 import Button from '../../../components/Button';
+import CardCard from '../../../components/CardCard';
+import AddressCard from '../../../components/AddressCard';
 
 import { Card, ContainerCardBottom } from '../../../styles/card';
-import { Container, Cards, ContainerCard } from './styled';
+import { Container, Cards } from './styled';
 
 const UserCard = () => {
   const { user, setUser, LSLoaded } = useUserContext();
@@ -85,83 +84,6 @@ const UserCard = () => {
   );
 };
 
-const UserCardsCard = () => {
-  const { cards } = useUserContext();
-
-  return (
-    <Card>
-      <header>
-        <h2 className="title-all-uppercase-spaced">Método de pagamento</h2>
-      </header>
-      <ContainerCardBottom className="center-items">
-        <div className="container-left">
-          {cards.length > 0 ? (
-            cards.map(
-              (card, i) =>
-                card.isDefault && (
-                  <ContainerCard key={i}>
-                    <div>
-                      <FaAddressCard />
-                      <span className="no-wrap">Nome: {card.cardName}</span>
-                    </div>
-                    <div>
-                      <IoCard />
-                      <span>
-                        {creditCardType(card.cardNumber)} terminando com{' '}
-                        <span>
-                          {card.cardNumber.slice(card.cardNumber.length - 4, card.cardNumber.length)}
-                        </span>
-                      </span>
-                    </div>
-                  </ContainerCard>
-                ),
-            )
-          ) : (
-            <div className="empty">
-              <p>Parece que você não tem nenhum cartão cadastrado, adicione um novo cartão</p>
-            </div>
-          )}
-        </div>
-        <div className="container-right">
-          <Button className="outline" buttonType="link" href="/profile/cards">
-            Mudar
-          </Button>
-        </div>
-      </ContainerCardBottom>
-    </Card>
-  );
-};
-
-const UserAddressCard = () => {
-  const address = {
-    number: '',
-  };
-
-  return (
-    <Card>
-      <header>
-        <h2 className="title-all-uppercase-spaced">Endereço de envio</h2>
-      </header>
-      <ContainerCardBottom className="center-items">
-        <div className="container-left">
-          {address.number ? (
-            <div className="address"></div>
-          ) : (
-            <div className="empty">
-              <p>Parece que você não tem nenhum endereço cadastrado, adicione um novo endereço</p>
-            </div>
-          )}
-        </div>
-        <div className="container-right">
-          <Button className="outline" buttonType="link" href="/profile/address">
-            Mudar
-          </Button>
-        </div>
-      </ContainerCardBottom>
-    </Card>
-  );
-};
-
 export default function UserOptions() {
   return (
     <Container>
@@ -171,8 +93,8 @@ export default function UserOptions() {
       </header>
       <Cards>
         <UserCard />
-        <UserCardsCard />
-        <UserAddressCard />
+        <CardCard />
+        <AddressCard />
       </Cards>
     </Container>
   );
