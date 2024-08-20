@@ -14,45 +14,85 @@ const NewAddress = () => {
           {
             input: {
               type: 'text',
-              name: 'cardholder-name',
-              id: 'cardholder-name',
+              name: 'shipping-name',
+              id: 'shipping-name',
               placeholder: 'Rebeca de Assis Machado',
               value: '',
               onChange: () => undefined,
             },
             label: {
-              content: 'Nome no cartão',
-              htmlFor: 'cardholder-name',
+              content: 'Nome do destinatário',
+              htmlFor: 'shipping-name',
+            },
+          },
+          {
+            input: {
+              type: 'text',
+              name: 'street-name',
+              id: 'street-name',
+              placeholder: 'Rua de Exemplo, N 20',
+              value: '',
+              onChange: () => undefined,
+            },
+            label: {
+              content: 'Nome da Rua e Número',
+              htmlFor: 'street-name',
+            },
+          },
+          {
+            input: {
+              type: 'text',
+              name: 'city-name',
+              id: 'city-name',
+              placeholder: 'Cidade de Exemplo',
+              value: '',
+              onChange: () => undefined,
+            },
+            label: {
+              content: 'Cidade',
+              htmlFor: 'city-name',
+            },
+          },
+          {
+            input: {
+              type: 'text',
+              name: 'state-name',
+              id: 'state-name',
+              placeholder: 'Seu Estado',
+              value: '',
+              onChange: () => undefined,
+            },
+            label: {
+              content: 'Estado',
+              htmlFor: 'state-name',
+            },
+          },
+          {
+            input: {
+              type: 'text',
+              name: 'country-name',
+              id: 'country-name',
+              placeholder: 'Brasil',
+              value: '',
+              onChange: () => undefined,
+            },
+            label: {
+              content: 'País',
+              htmlFor: 'country-name',
             },
           },
           {
             input: {
               className: 'grey-placeholder pdg-l',
-              type: 'text',
-              name: 'card-number',
-              id: 'card-number',
-              placeholder: '💳  5126-5987-2214-7621',
-              value: '',
+              type: 'checkbox',
+              name: 'default-address',
+              id: 'default-address',
+              checked: false,
               onChange: () => undefined,
             },
             label: {
-              content: 'Numero do cartão',
-              htmlFor: 'card-number',
-            },
-          },
-          {
-            input: {
-              className: 'grey-placeholder pdg-l',
-              type: 'text',
-              name: 'new-name-to-it',
-              id: 'new-name-to-it',
-              placeholder: '',
-              value: '',
-              onChange: () => undefined,
-            },
-            label: {
-              content: 'Numero do cartão',
-              htmlFor: 'new-name-to-it',
+              content: 'Salvar como endereço padrão',
+              htmlFor: 'default-address',
             },
           },
         ]}
