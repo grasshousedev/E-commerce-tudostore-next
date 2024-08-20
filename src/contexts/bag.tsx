@@ -88,7 +88,6 @@ export const BagProvider = ({ children }: BagProviderProps) => {
   }, [bagItems]);
 
   const requestBagData = async () => {
-    console.log('requisitou');
     setRunnedFuncRequest(true);
     if (bagItems.length === 0) return;
     const items: BagItemDataProtocol[] = [];
