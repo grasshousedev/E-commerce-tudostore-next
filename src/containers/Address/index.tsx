@@ -118,7 +118,7 @@ const NewAddress = () => {
   return (
     <CardSection className="m-padding">
       <header>
-        <h1 className="title-all-uppercase-spaced">Adicionar novo cartão</h1>
+        <h1 className="title-all-uppercase-spaced">Adicionar novo endereço</h1>
       </header>
       <Form
         fields={[
