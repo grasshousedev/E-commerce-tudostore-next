@@ -41,6 +41,8 @@ const BagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItem
     }
   };
 
+  console.log(bagItems);
+
   return (
     <ContainerBagItem>
       <div className="left-container">

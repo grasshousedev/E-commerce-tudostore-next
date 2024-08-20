@@ -94,6 +94,10 @@ export const BagProvider = ({ children }: BagProviderProps) => {
     const items: BagItemDataProtocol[] = [];
     for (let i = 0; i < bagItems.length; i++) {
       try {
+        if (bagData[i]) {
+          items.push(bagData[i]);
+          continue;
+        }
         const { response, json: data }: { response: Response; json: BagItemDataResponse } = await jsonFetch(
           `https://dummyjson.com/products/${encodeURIComponent(bagItems[i].id)}`,
           'select=rating,brand,price',
@@ -120,6 +124,7 @@ export const BagProvider = ({ children }: BagProviderProps) => {
     }
     setBagData(items);
     setRunnedFuncRequest(true);
+    setCanRequest(false);
   };
 
   useEffect(() => {
