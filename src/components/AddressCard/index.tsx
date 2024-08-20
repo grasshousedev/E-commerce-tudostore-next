@@ -1,11 +1,12 @@
 import Button from '../Button';
 
+import { useUserContext } from '../../contexts/user';
+
 import { Card, ContainerCardBottom } from '../../styles/card';
+import { ContainerAddress } from './styled';
 
 export default function AddressCard() {
-  const address = {
-    number: '',
-  };
+  const { address } = useUserContext();
 
   return (
     <Card>
@@ -14,8 +15,23 @@ export default function AddressCard() {
       </header>
       <ContainerCardBottom className="center-items">
         <div className="container-left">
-          {address.number ? (
-            <div className="address"></div>
+          {address.shippingName ? (
+            <ContainerAddress>
+              <div>
+                <span className="no-wrap">{address.shippingName}</span>
+              </div>
+              <div>
+                <span className="no-wrap">{address.streetName}</span>
+              </div>
+              <div>
+                <span className="no-wrap">
+                  {address.cityName}, {address.stateName}
+                </span>
+              </div>
+              <div>
+                <span className="no-wrap">{address.countryName}</span>
+              </div>
+            </ContainerAddress>
           ) : (
             <div className="empty">
               <p>Parece que você não tem nenhum endereço cadastrado, adicione um novo endereço</p>

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const ContainerCard = styled.div`
+export const ContainerAddress = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.l6};
 
   & > div + div {
