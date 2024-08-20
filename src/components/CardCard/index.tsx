@@ -1,3 +1,4 @@
+import { ElementType } from 'react';
 import { FaAddressCard } from 'react-icons/fa';
 import { IoCard } from 'react-icons/io5';
 
@@ -12,15 +13,16 @@ import { ContainerCard } from './styled';
 
 export type CardCardProps = {
   className?: string;
+  Title?: ElementType;
 };
 
-export default function CardCard({ className }: CardCardProps) {
+export default function CardCard({ className, Title = 'h2' }: CardCardProps) {
   const { cards } = useUserContext();
 
   return (
     <Card className={className}>
       <header>
-        <h2 className="title-all-uppercase-spaced">Método de pagamento</h2>
+        <Title className="title-all-uppercase-spaced">Método de pagamento</Title>
       </header>
       <ContainerCardBottom className="center-items">
         <div className="container-left">

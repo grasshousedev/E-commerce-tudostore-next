@@ -1,3 +1,4 @@
+import { ElementType } from 'react';
 import Button from '../Button';
 
 import { useUserContext } from '../../contexts/user';
@@ -7,15 +8,16 @@ import { ContainerAddress } from './styled';
 
 export type AddressCardProps = {
   className?: string;
+  Title?: ElementType;
 };
 
-export default function AddressCard({ className }: AddressCardProps) {
+export default function AddressCard({ className, Title = 'h2' }: AddressCardProps) {
   const { address } = useUserContext();
 
   return (
     <Card className={className}>
       <header>
-        <h2 className="title-all-uppercase-spaced">Endereço de envio</h2>
+        <Title className="title-all-uppercase-spaced">Endereço de envio</Title>
       </header>
       <ContainerCardBottom className="center-items">
         <div className="container-left">

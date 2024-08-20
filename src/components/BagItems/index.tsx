@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 
 import { BagItemDataProtocol, useBagContext } from '../../contexts/bag';
@@ -7,10 +8,13 @@ import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
 import Button from '../Button';
 
-import { ContainerBagItems, BagItem, BagItemAnimated, ContainerEmpty } from './styled';
-import Image from 'next/image';
+import { ContainerBagItems, ContainerBagItem, BagItemAnimated, ContainerEmpty } from './styled';
 
-const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItemDataProtocol) => {
+export type BagItemsProps = {
+  className?: string;
+};
+
+const BagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItemDataProtocol) => {
   const { bagItems, setBagItems } = useBagContext();
 
   const handleDecreaseItem = () => {
@@ -38,7 +42,7 @@ const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }
   };
 
   return (
-    <BagItem>
+    <ContainerBagItem>
       <div className="left-container">
         <Image src={thumbnail} alt={`Imagem do produto ${title}`} width={200} height={200} />
       </div>
@@ -66,19 +70,19 @@ const ContainerBagItem = ({ id, repeat, thumbnail, title, rating, brand, price }
           </div>
         </div>
       </div>
-    </BagItem>
+    </ContainerBagItem>
   );
 };
 
-export default function BagItems() {
+export default function BagItems({ className }: BagItemsProps) {
   const { bagItems, bagData, LSLoaded } = useBagContext();
 
   return (
     <>
-      <ContainerBagItems className={LSLoaded && bagItems.length === 0 ? 'hide' : ''}>
+      <ContainerBagItems className={`${className} ${LSLoaded && bagItems.length === 0 ? 'hide' : ''}`}>
         {bagData.length > 0 &&
           bagData.map((item) => (
-            <ContainerBagItem
+            <BagItem
               key={item.id}
               id={item.id}
               repeat={item.repeat}

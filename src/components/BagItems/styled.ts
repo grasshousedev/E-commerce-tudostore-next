@@ -3,16 +3,33 @@ import styled, { css } from 'styled-components';
 export const ContainerBagItems = styled.div`
   margin-top: 1.5rem;
 
+  &.m-top-1 {
+    margin-top: 1rem;
+  }
+
   &.hide {
     display: none;
   }
 
-  div + div {
+  & > div + div {
     margin-top: 1.5rem;
+  }
+
+  &.border-divisor {
+    & > div {
+      border-radius: 0;
+      margin-inline: 0.5rem;
+    }
+
+    & > div + div {
+      border-top: 1px solid ${({ theme }) => theme.colors.placeholder}80;
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+    }
   }
 `;
 
-export const BagItem = styled.div`
+export const ContainerBagItem = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 1.313rem;
@@ -33,8 +50,13 @@ export const BagItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 0.5rem 1rem;
 
     .container-top {
+      span {
+        display: block;
+      }
+
       ${({ theme }) => css`
         h2 {
           font-size: ${theme.fontSizes.l4};
@@ -81,10 +103,23 @@ export const BagItem = styled.div`
     .container-bottom {
       display: flex;
       justify-content: space-between;
+      padding-block: 0.813rem;
+      margin-top: 0.5rem;
+
+      span {
+        display: block;
+      }
+
+      .price-repeat,
+      .repeat-manage {
+        padding: 0.5rem;
+      }
 
       .price-repeat {
         font-size: ${({ theme }) => theme.fontSizes.l6};
         color: ${({ theme }) => theme.colors.dark};
+        display: flex;
+        align-items: center;
       }
 
       .repeat-manage {

@@ -12,7 +12,9 @@ import { convertToBRL } from '../../utils/convertPriceBRL';
 import AddressCard from '../../components/AddressCard';
 import CardCard from '../../components/CardCard';
 import Button from '../../components/Button';
+import BagItems from '../../components/BagItems';
 
+import { Card } from '../../styles/card';
 import { Container, ContainerResume, ContainerOrderInfos, ContainerOrderTotal } from './styled';
 
 export default function Checkout() {
@@ -47,8 +49,14 @@ export default function Checkout() {
     !isClosed && (
       <Container>
         <section className="left-container">
-          <AddressCard className="m-border-radius" />
-          <CardCard className="m-border-radius" />
+          <AddressCard className="m-border-radius" Title={'h1'} />
+          <CardCard className="m-border-radius" Title={'h1'} />
+          <Card className="m-border-radius">
+            <header>
+              <h1 className="title-all-uppercase-spaced">Reveja sua bolsa</h1>
+            </header>
+            <BagItems className="m-top-1 border-divisor" />
+          </Card>
         </section>
         <section className="right-content">
           <ContainerResume>
