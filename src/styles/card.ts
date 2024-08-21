@@ -16,6 +16,10 @@ const cardStyle = css`
 
   &.m-padding {
     padding: 2rem;
+
+    @media screen and (max-width: 536px) {
+      padding: 1.25rem;
+    }
   }
 
   &.error {
@@ -27,7 +31,7 @@ const cardStyle = css`
   header {
     padding: 0.5rem;
 
-    * > h1,
+    & > h1,
     h2 {
       ${({ theme }) => css`
         font-size: ${theme.fontSizes.l4};

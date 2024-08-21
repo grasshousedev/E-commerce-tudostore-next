@@ -3,11 +3,19 @@ import styled, { css } from 'styled-components';
 export const FormContainer = styled.form`
   margin-top: 1.5rem;
 
+  @media screen and (max-width: 536px) {
+    margin-top: 0.5rem;
+  }
+
   .container-inputs {
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @media screen and (max-width: 536px) {
+      gap: 0.5rem;
+    }
 
     .container-input {
       display: flex;
@@ -29,6 +37,11 @@ export const FormContainer = styled.form`
           border-radius: 0.813rem;
           box-shadow: 0 4px 16px ${theme.colors.placeholder}26;
           color: ${theme.colors.dark};
+
+          @media screen and (max-width: 536px) {
+            font-size: ${theme.fontSizes.base};
+            height: 46px;
+          }
 
           &[type='date'] {
             color: ${theme.colors.placeholder}80;
@@ -80,6 +93,11 @@ export const FormContainer = styled.form`
   .container-submit {
     margin-top: 2rem;
     padding: 1rem;
+
+    @media screen and (max-width: 536px) {
+      margin-top: 1rem;
+      padding-block: 0.5rem;
+    }
 
     button {
       width: 100%;
