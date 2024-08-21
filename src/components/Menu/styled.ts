@@ -85,8 +85,8 @@ export const Container = styled.div`
         max-width: 70px;
 
         img {
-          min-width: 27px;
-          min-height: 27px;
+          width: 30px;
+          height: 30px;
         }
       }
     }
