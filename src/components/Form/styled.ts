@@ -69,6 +69,16 @@ export const FormContainer = styled.form`
       display: grid;
       grid-template-columns: 35% 25% 25%;
       gap: 2rem;
+      align-items: flex-end;
+
+      @media screen and (max-width: 536px) {
+        gap: 1rem;
+      }
+
+      @media screen and (max-width: 400px) {
+        width: 100%;
+        grid-template-columns: repeat(2, 47%);
+      }
     }
 
     .container-input-checkbox {
@@ -79,6 +89,10 @@ export const FormContainer = styled.form`
       label {
         ${({ theme }) => css`
           font-size: ${theme.fontSizes.l6};
+
+          @media screen and (max-width: 536px) {
+            font-size: ${theme.fontSizes.base};
+          }
         `}
       }
 

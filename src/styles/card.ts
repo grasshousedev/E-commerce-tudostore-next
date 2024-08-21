@@ -136,13 +136,14 @@ export const ContainerCardBottom = styled.div`
   .container-left {
     display: flex;
     flex-direction: column;
-    align-self: flex-start;
+    align-self: flex-end;
     font-size: ${({ theme }) => theme.fontSizes.l6};
     gap: 0.5rem;
     padding: 0.5rem;
 
     @media screen and (max-width: 536px) {
       font-size: ${({ theme }) => theme.fontSizes.base};
+      align-self: flex-start;
     }
 
     &.w-100 {
@@ -156,6 +157,12 @@ export const ContainerCardBottom = styled.div`
     span:not(span.accent-color):not(span.plchldr) {
       font-size: inherit;
       color: ${({ theme }) => theme.colors.dark};
+    }
+
+    @media screen and (max-width: 536px) {
+      span.plchldr {
+        font-size: ${({ theme }) => theme.fontSizes.base};
+      }
     }
 
     .empty {
