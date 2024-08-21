@@ -48,5 +48,79 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    a.profile-link {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    height: calc(65.6406px + 1rem);
+    width: calc(100% - 2rem);
+    flex-direction: row;
+    top: unset;
+    bottom: 1rem;
+    position: fixed;
+    box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
+    padding-bottom: 1.6rem;
+
+    nav {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+      @media screen and (max-width: 326px) {
+        gap: 1.2rem;
+      }
+
+      a.profile-link {
+        display: flex;
+      }
+
+      a {
+        max-width: 70px;
+
+        img {
+          min-width: 27px;
+          min-height: 27px;
+        }
+      }
+    }
+
+    a.page-link {
+      position: relative;
+    }
+
+    a.home-redirect::after {
+      content: 'Home';
+    }
+
+    a.home-link::after {
+      content: 'Produtos';
+    }
+
+    a.bag-link::after {
+      content: 'Sacola';
+    }
+
+    a.profile-link::after {
+      content: 'Perfil';
+    }
+
+    a.profile-link {
+      display: none;
+    }
+
+    a.page-link::after {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 100%);
+
+      ${({ theme }) => css`
+        font-size: ${theme.fontSizes.small};
+        color: ${theme.colors.dark};
+      `}
+    }
   }
 `;

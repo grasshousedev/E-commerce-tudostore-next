@@ -113,4 +113,8 @@ export const SearchBar = styled.div`
       width: 50px;
     }
   }
+
+  @media screen and (max-width: 963px) {
+    width: 100%;
+  }
 `;

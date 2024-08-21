@@ -18,18 +18,21 @@ export default function Menu() {
     !inFocusPage && (
       <Container>
         <nav>
-          <Link className="logo" href="/">
+          <Link className="page-link home-redirect logo" href="/">
             <Image src={logo} alt="Logo da página" />
           </Link>
-          <Link href="/" className={`${pathname === '/' ? 'in' : ''}`}>
+          <Link href="/" className={`page-link home-link ${pathname === '/' ? 'in' : ''}`}>
             <IoStorefront />
           </Link>
-          <Link href="/bag" className={`${pathname === '/bag' ? 'in' : ''}`}>
+          <Link href="/bag" className={`page-link bag-link ${pathname === '/bag' ? 'in' : ''}`}>
             <IoBagHandle />
+          </Link>
+          <Link href="/profile" className={`page-link profile-link ${pathname === '/profile' ? 'in' : ''}`}>
+            <IoPerson />
           </Link>
         </nav>
         <div className="me">
-          <Link href="/profile" className={`${pathname === '/profile' ? 'in' : ''}`}>
+          <Link href="/profile" className={`page-link profile-link ${pathname === '/profile' ? 'in' : ''}`}>
             <IoPerson />
           </Link>
         </div>
