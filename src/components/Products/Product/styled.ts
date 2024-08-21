@@ -15,11 +15,13 @@ export const ContainerImg = styled.div`
   border-radius: 1.375rem;
   overflow: hidden;
 
-  /* img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  } */
+  @media screen and (max-width: 530px) {
+    height: 180px;
+  }
+
+  @media screen and (max-width: 450px) {
+    height: 150px;
+  }
 `;
 
 export const ContainerInfo = styled.div`
@@ -57,6 +59,10 @@ export const ContainerInfo = styled.div`
     align-items: center;
     padding: 0.5rem;
     margin-top: 0.5rem;
+
+    @media screen and (max-width: 440px) {
+      padding: 0;
+    }
 
     .price {
       ${({ theme }) => css`

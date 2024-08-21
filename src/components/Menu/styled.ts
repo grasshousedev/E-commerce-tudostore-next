@@ -64,6 +64,10 @@ export const Container = styled.div`
     box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
     padding-bottom: 1.6rem;
 
+    @media screen and (max-width: 500px) {
+      height: calc(61.6406px + 1rem);
+    }
+
     nav {
       flex-direction: row;
       justify-content: space-between;
