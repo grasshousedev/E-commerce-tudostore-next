@@ -96,7 +96,7 @@ export const Container = styled.div`
     }
 
     a.home-redirect::after {
-      content: 'Home';
+      content: 'Tudo Store';
     }
 
     a.home-link::after {
@@ -120,6 +120,7 @@ export const Container = styled.div`
       left: 50%;
       bottom: 0;
       transform: translate(-50%, 100%);
+      white-space: nowrap;
 
       ${({ theme }) => css`
         font-size: ${theme.fontSizes.small};
