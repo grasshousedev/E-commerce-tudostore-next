@@ -50,6 +50,10 @@ export const LayoutWrapper = styled.div`
 
   @media screen and (max-width: 650px) {
     display: block;
+
+    main {
+      margin-bottom: calc(65.6406px + 60px);
+    }
   }
 
   & > *:nth-child(2) {
