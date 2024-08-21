@@ -18,6 +18,10 @@ const style = css`
     font-size: ${theme.fontSizes.l6};
     font-weight: 500;
 
+    @media screen and (max-width: 536px) {
+      font-size: ${({ theme }) => theme.fontSizes.base};
+    }
+
     &:hover {
       background-color: ${theme.colors.placeholder}E0;
     }

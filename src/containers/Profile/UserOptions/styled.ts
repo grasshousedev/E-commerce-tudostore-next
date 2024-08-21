@@ -11,6 +11,10 @@ export const Container = styled.main`
       ${({ theme }) => css`
         color: ${theme.colors.dark};
         font-size: ${theme.fontSizes.l2};
+
+        @media screen and (max-width: 536px) {
+          font-size: ${theme.fontSizes.l3};
+        }
       `}
       font-weight: 400;
     }
@@ -30,4 +34,8 @@ export const Cards = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+
+  @media screen and (max-width: 945px) {
+    grid-template-columns: 1fr;
+  }
 `;

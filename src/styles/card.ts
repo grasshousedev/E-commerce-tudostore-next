@@ -31,6 +31,10 @@ const cardStyle = css`
     h2 {
       ${({ theme }) => css`
         font-size: ${theme.fontSizes.l4};
+
+        @media screen and (max-width: 536px) {
+          font-size: ${theme.fontSizes.l5};
+        }
       `}
     }
   }
@@ -116,6 +120,10 @@ export const ContainerCardBottom = styled.div`
   justify-content: space-between;
   gap: 1rem;
 
+  @media screen and (max-width: 536px) {
+    flex-direction: column;
+  }
+
   &.center-items {
     height: 100%;
     align-items: center;
@@ -124,9 +132,14 @@ export const ContainerCardBottom = styled.div`
   .container-left {
     display: flex;
     flex-direction: column;
+    align-self: flex-start;
     font-size: ${({ theme }) => theme.fontSizes.l6};
     gap: 0.5rem;
     padding: 0.5rem;
+
+    @media screen and (max-width: 536px) {
+      font-size: ${({ theme }) => theme.fontSizes.base};
+    }
 
     &.w-100 {
       width: 100%;
@@ -154,6 +167,10 @@ export const ContainerCardBottom = styled.div`
   .container-right {
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 536px) {
+      width: 100%;
+    }
 
     button {
       &.auto-top {

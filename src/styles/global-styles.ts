@@ -121,6 +121,5 @@ export const LayoutWrapper = styled.div`
   .title-all-uppercase-spaced {
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    font-size: ${({ theme }) => theme.fontSizes.l4};
   }
 `;
