@@ -8,11 +8,14 @@ export const Container = styled.section`
 
   @media screen and (max-width: 530px) {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.2rem;
+    gap: 1.2rem;
   }
 
   @media screen and (max-width: 450px) {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0rem;
+  }
+
+  @media screen and (max-width: 370px) {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
 `;

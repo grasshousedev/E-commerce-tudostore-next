@@ -6,6 +6,10 @@ export const Container = styled.a`
   padding: 1rem;
 
   cursor: pointer;
+
+  @media screen and (max-width: 530px) {
+    padding: 0;
+  }
 `;
 
 export const ContainerImg = styled.div`
@@ -16,11 +20,19 @@ export const ContainerImg = styled.div`
   overflow: hidden;
 
   @media screen and (max-width: 530px) {
-    height: 180px;
+    height: 200px;
   }
 
   @media screen and (max-width: 450px) {
-    height: 150px;
+    height: 180px;
+  }
+
+  @media screen and (max-width: 404px) {
+    height: 160px;
+  }
+
+  @media screen and (max-width: 360px) {
+    height: 140px;
   }
 `;
 
