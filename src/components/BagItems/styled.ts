@@ -36,12 +36,33 @@ export const ContainerBagItem = styled.div`
   padding: 1rem 1.5rem;
   gap: 2rem;
 
+  @media screen and (max-width: 400px) {
+    padding-inline: 1rem;
+    gap: 1rem;
+  }
+
+  @media screen and (max-width: 360px) {
+    gap: 0rem;
+  }
+
+  @media screen and (max-width: 346px) {
+    flex-direction: column;
+  }
+
   .left-container {
     img {
       height: 100%;
       min-width: 200px;
       width: 100%;
       object-fit: contain;
+
+      @media screen and (max-width: 963px) {
+        min-width: 100px;
+      }
+
+      @media screen and (max-width: 536px) {
+        min-width: unset;
+      }
     }
   }
 
@@ -52,6 +73,10 @@ export const ContainerBagItem = styled.div`
     justify-content: space-between;
     padding: 0.5rem 1rem;
 
+    @media screen and (max-width: 536px) {
+      padding: 0;
+    }
+
     .container-top {
       span {
         display: block;
@@ -61,12 +86,20 @@ export const ContainerBagItem = styled.div`
         h2 {
           font-size: ${theme.fontSizes.l4};
           color: ${theme.colors.dark};
+
+          @media screen and (max-width: 536px) {
+            font-size: ${theme.fontSizes.l5};
+          }
         }
 
         .brand {
           font-size: ${theme.fontSizes.l6};
           color: ${theme.colors.secondary};
           margin-top: 0.5rem;
+
+          @media screen and (max-width: 536px) {
+            font-size: ${theme.fontSizes.base};
+          }
         }
 
         .rating {
@@ -81,8 +114,13 @@ export const ContainerBagItem = styled.div`
             text-wrap: nowrap;
 
             svg {
-              width: 1.5rem;
-              height: 1.5rem;
+              width: 24px;
+              height: 24px;
+
+              @media screen and (max-width: 536px) {
+                width: 16px;
+                height: 16px;
+              }
             }
 
             svg + svg {
@@ -94,6 +132,10 @@ export const ContainerBagItem = styled.div`
             ${({ theme }) => css`
               font-size: ${theme.fontSizes.l6};
               color: ${theme.colors.accent[1]};
+
+              @media screen and (max-width: 536px) {
+                font-size: ${theme.fontSizes.base};
+              }
             `}
           }
         }
@@ -113,6 +155,10 @@ export const ContainerBagItem = styled.div`
       .price-repeat,
       .repeat-manage {
         padding: 0.5rem;
+
+        @media screen and (max-width: 536px) {
+          padding: 0;
+        }
       }
 
       .price-repeat {
@@ -120,12 +166,20 @@ export const ContainerBagItem = styled.div`
         color: ${({ theme }) => theme.colors.dark};
         display: flex;
         align-items: center;
+
+        @media screen and (max-width: 536px) {
+          font-size: ${({ theme }) => theme.fontSizes.base};
+        }
       }
 
       .repeat-manage {
         display: flex;
         align-items: center;
         gap: 1rem;
+
+        @media screen and (max-width: 536px) {
+          gap: 0;
+        }
 
         button:nth-child(1) {
           color: ${({ theme }) => theme.colors.warnColors.danger};
@@ -150,6 +204,10 @@ export const ContainerBagItem = styled.div`
           ${({ theme }) => css`
             color: ${theme.colors.dark};
             font-size: ${theme.fontSizes.l6};
+
+            @media screen and (max-width: 536px) {
+              font-size: ${({ theme }) => theme.fontSizes.base};
+            }
           `}
         }
       }
