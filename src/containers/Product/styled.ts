@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.main`
   margin-top: 3rem;
 
   a.back-link {
@@ -51,7 +51,7 @@ export const ContainerTop = styled.section`
     grid-template-columns: repeat(2, 0.5fr);
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1100px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -126,6 +126,11 @@ export const ContainerGallery = styled.div`
     justify-content: center;
     align-items: center;
 
+    @media screen and (max-width: 536px) {
+      min-width: unset;
+      height: 45vh;
+    }
+
     @media screen and (max-width: 1000px) {
       grid-column: 1;
     }
@@ -150,6 +155,10 @@ export const ContainerMainInfos = styled.div`
         font-size: ${theme.fontSizes.l1};
         color: ${theme.colors.dark};
         font-weight: bold;
+
+        @media screen and (max-width: 536px) {
+          font-size: ${theme.fontSizes.l3};
+        }
       `}
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -163,6 +172,10 @@ export const ContainerMainInfos = styled.div`
         font-size: ${theme.fontSizes.l4};
         color: ${theme.colors.placeholder}80;
         margin-top: 0.5rem;
+
+        @media screen and (max-width: 536px) {
+          font-size: ${theme.fontSizes.l5};
+        }
       `};
     }
   }
@@ -177,6 +190,11 @@ export const ContainerMainInfos = styled.div`
       display: flex;
       gap: 1.5rem;
 
+      @media screen and (max-width: 536px) {
+        padding: 0.7rem 0.5rem;
+        gap: 1rem;
+      }
+
       .stars {
         ${({ theme }) => css`
           color: ${theme.colors.accent[1]};
@@ -184,8 +202,13 @@ export const ContainerMainInfos = styled.div`
         text-wrap: nowrap;
 
         svg {
-          width: 1.5rem;
-          height: 1.5rem;
+          width: 24px;
+          height: 24px;
+
+          @media screen and (max-width: 536px) {
+            width: 16px;
+            height: 16px;
+          }
         }
 
         svg + svg {
@@ -197,6 +220,10 @@ export const ContainerMainInfos = styled.div`
         ${({ theme }) => css`
           font-size: ${theme.fontSizes.l6};
           color: ${theme.colors.accent[1]};
+
+          @media screen and (max-width: 536px) {
+            font-size: ${theme.fontSizes.base};
+          }
         `}
       }
     }
@@ -205,6 +232,11 @@ export const ContainerMainInfos = styled.div`
       ${({ theme }) => css`
         color: ${theme.colors.dark};
         font-size: ${theme.fontSizes.l4};
+        margin-inline: 0.5rem;
+
+        @media screen and (max-width: 536px) {
+          font-size: ${theme.fontSizes.l5};
+        }
       `}
       font-weight: 500;
     }
@@ -215,6 +247,10 @@ export const ContainerMainInfos = styled.div`
       ${({ theme }) => css`
         font-size: ${theme.fontSizes.l6};
         color: ${theme.colors.dark};
+
+        @media screen and (max-width: 536px) {
+          font-size: ${theme.fontSizes.base};
+        }
       `}
       display: -webkit-box;
       -webkit-line-clamp: 6; // <- you can change rows number
@@ -248,6 +284,10 @@ export const ContainerBottom = styled.section`
       color: ${theme.colors.dark};
       font-size: ${theme.fontSizes.l4};
       font-weight: 500;
+
+      @media screen and (max-width: 536px) {
+        font-size: ${theme.fontSizes.l5};
+      }
     `}
   }
 
@@ -258,6 +298,10 @@ export const ContainerBottom = styled.section`
 
       font-size: ${({ theme }) => theme.fontSizes.l5};
       font-weight: 400;
+
+      @media screen and (max-width: 536px) {
+        font-size: ${({ theme }) => theme.fontSizes.l6};
+      }
 
       & > .accent {
         color: ${({ theme }) => theme.colors.accent['1']};
@@ -274,16 +318,18 @@ export const ContainerBottom = styled.section`
       .review-item {
         & > * + * {
           margin-top: 0.25rem;
+          font-size: ${({ theme }) => theme.fontSizes.base};
         }
 
         & > * + *.comment {
           margin-top: 0.5rem;
+          font-size: ${({ theme }) => theme.fontSizes.base};
         }
 
         .stars {
           svg {
-            width: 1.2rem;
-            height: 1.2rem;
+            width: 19.2px;
+            height: 19.2px;
           }
 
           svg + svg {

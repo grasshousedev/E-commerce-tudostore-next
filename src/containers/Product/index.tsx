@@ -122,7 +122,7 @@ export default function Product({ product }: ProductPageProps) {
               <div key={i} className="review-item">
                 <div className="stars">{getRatingStars(review.rating)}</div>
                 <p className="created-by-date">
-                  <span className="review-date">{convertDate(review.date)}</span>
+                  <span className="review-date">{convertDate(review.date)}</span> por{' '}
                   <span className="author">{review.reviewerName}</span>
                 </p>
                 <p className="comment">{review.comment}</p>

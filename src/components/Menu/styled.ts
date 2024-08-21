@@ -104,7 +104,7 @@ export const Container = styled.div`
     }
 
     a.bag-link::after {
-      content: 'Sacola';
+      content: 'Bolsa';
     }
 
     a.profile-link::after {
