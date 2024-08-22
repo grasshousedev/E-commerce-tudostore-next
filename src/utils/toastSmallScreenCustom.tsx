@@ -26,7 +26,7 @@ export const toastSmallScreenCustom = (img: string, msg: string) => {
       <p>{msg}</p>
     </div>,
   );
-  setTimeout(() => toast.dismiss(toastId), 20000);
+  setTimeout(() => toast.dismiss(toastId), 1300);
 };
 
 /* .custom-toast-small-icon': {

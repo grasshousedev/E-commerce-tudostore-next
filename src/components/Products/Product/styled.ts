@@ -91,6 +91,15 @@ export const ContainerInfo = styled.div`
       justify-content: center;
       align-items: center;
 
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.placeholder}E0;
+      }
+
+      &:active {
+        transition: background-color 0.07s ease-out;
+        background-color: ${({ theme }) => theme.colors.placeholder}C0;
+      }
+
       svg {
         width: 18px;
         height: 18px;

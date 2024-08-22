@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { getLSItem, setLSItem } from '../services/localStorage';
 import { jsonFetch } from '../utils/jsonFetch';
@@ -142,6 +143,16 @@ export const BagProvider = ({ children }: BagProviderProps) => {
     setBagTotal(total);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bagData]);
+
+  useEffect(() => {
+    if (bagItems.length > 40) {
+      setBagItems(bagItems.slice(0, 40));
+      runnedFuncRequest && setCanRequest(false);
+      toast.dismiss();
+      toast.error('Limite máximo de items na bolsa atingido');
+      return;
+    }
+  }, [runnedFuncRequest, bagItems]);
 
   return (
     <Context.Provider value={{ bagItems, setBagItems, bagTotal, bagData, LSLoaded }}>
