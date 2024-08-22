@@ -4,6 +4,7 @@ export const Container = styled.a`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  max-width: 300px;
 
   cursor: pointer;
 
