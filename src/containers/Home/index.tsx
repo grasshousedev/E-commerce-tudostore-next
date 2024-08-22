@@ -27,6 +27,7 @@ export default function Home({ products }: HomePageProps) {
   const [page, setPage] = useState(1);
   const [isLoadingMoreProducts, setIsLoadingMoreProducts] = useState(false);
   const [inputSearchValue, setInputSearchValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const debounceTimeoutRef = useRef(null);
 
   const isNotPossibleToLoadMore = productsData.products.length >= productsData.total;
@@ -79,9 +80,24 @@ export default function Home({ products }: HomePageProps) {
     };
   }, [isLoadingMoreProducts, loadMoreProducts]);
 
+  useEffect(() => {
+    isLoading &&
+      setProductsData({
+        products: [],
+        total: 0,
+        skip: 0,
+        limit: 0,
+      });
+  }, [isLoading]);
+
+  console.log(isLoadingMoreProducts);
+
   const handleSearch = useDebouncedCallback(async (searchValue?: string) => {
+    setIsLoading(true);
     const searchResult = await searchProducts(`q=${encodeURIComponent(searchValue)}`);
     setProductsData(searchResult);
+    setIsLoading(false);
+    setPage(1);
   }, 300);
 
   const handleActiveInputSearch = () => {
@@ -98,6 +114,8 @@ export default function Home({ products }: HomePageProps) {
     setInputSearchValue(value);
     handleSearch(value);
   };
+
+  console.log(page);
 
   return (
     <Container>

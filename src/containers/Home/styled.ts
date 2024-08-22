@@ -43,6 +43,7 @@ export const SearchBar = styled.div`
   padding: 0.5rem;
   position: sticky;
   top: 1rem;
+  z-index: 10000;
 
   &.off {
     align-items: center;
