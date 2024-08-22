@@ -91,6 +91,8 @@ const cardStyle = css`
 
         input {
           background-color: ${({ theme }) => theme.colors.white};
+          -webkit-appearance: none;
+          -webkit-box-shadow: 0 4px 16px ${({ theme }) => theme.colors.placeholder}26;
           box-shadow: 0 4px 16px ${({ theme }) => theme.colors.placeholder}26;
           width: 180px;
           height: 1.6rem;

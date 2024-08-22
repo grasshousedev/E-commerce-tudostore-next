@@ -120,6 +120,8 @@ export const ContainerCheckoutFinal = styled.div`
       stroke-width: 2;
       stroke: #4bb71b;
       stroke-miterlimit: 10;
+      -webkit-appearance: none;
+      -webkit-box-shadow: inset 0px 0px 0px #4bb71b;
       box-shadow: inset 0px 0px 0px #4bb71b;
       animation:
         fill 0.4s ease-in-out 0.4s forwards,
@@ -166,6 +168,8 @@ export const ContainerCheckoutFinal = styled.div`
 
     @keyframes fill {
       100% {
+        -webkit-appearance: none;
+        -webkit-box-shadow: inset 0px 0px 0px 30px #4bb71b;
         box-shadow: inset 0px 0px 0px 30px #4bb71b;
       }
     }

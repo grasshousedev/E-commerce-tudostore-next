@@ -35,6 +35,8 @@ export const FormContainer = styled.form`
           padding: 0.5rem 1rem;
           background-color: ${theme.colors.white};
           border-radius: 0.813rem;
+          -webkit-appearance: none;
+          -webkit-box-shadow: 0 4px 16px ${theme.colors.placeholder}26;
           box-shadow: 0 4px 16px ${theme.colors.placeholder}26;
           color: ${theme.colors.dark};
 

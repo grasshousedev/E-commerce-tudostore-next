@@ -8,6 +8,8 @@ export const Container = styled.main`
       background-color: ${theme.colors.accent['1']};
       font-size: ${theme.fontSizes.l6};
       color: ${theme.colors.white};
+      -webkit-appearance: none;
+      -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
       box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
       font-weight: 500;
     `}
@@ -26,6 +28,8 @@ export const Container = styled.main`
       transition: none;
       color: transparent;
       background-color: transparent;
+      -webkit-appearance: none;
+      -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
       box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
     }
   }
@@ -88,6 +92,8 @@ export const SearchBar = styled.div`
     &::placeholder {
       color: ${({ theme }) => theme.colors.placeholder}80;
     }
+    -webkit-appearance: none;
+    -webkit-box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
     box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
     transition: margin-top 0.2s;
 
