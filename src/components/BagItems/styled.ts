@@ -107,6 +107,10 @@ export const ContainerBagItem = styled.div`
           gap: 1.5rem;
           margin-top: 1rem;
 
+          @media screen and (max-width: 421px) {
+            gap: 1rem;
+          }
+
           .stars {
             ${({ theme }) => css`
               color: ${theme.colors.accent[1]};
@@ -125,6 +129,10 @@ export const ContainerBagItem = styled.div`
 
             svg + svg {
               margin-left: 0.5rem;
+
+              @media screen and (max-width: 421px) {
+                margin-left: 0.2rem;
+              }
             }
           }
 
