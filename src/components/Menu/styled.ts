@@ -68,7 +68,7 @@ export const Container = styled.div`
     -webkit-appearance: none;
     -webkit-box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
     box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
-    /* padding-bottom: 1.6rem; */
+    border-radius: 1rem;
 
     @media screen and (max-width: 500px) {
       height: calc(61.6406px + 1rem);
