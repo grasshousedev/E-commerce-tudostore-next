@@ -90,8 +90,6 @@ export default function Home({ products }: HomePageProps) {
       });
   }, [isLoading]);
 
-  console.log(isLoadingMoreProducts);
-
   const handleSearch = useDebouncedCallback(async (searchValue?: string) => {
     setIsLoading(true);
     const searchResult = await searchProducts(`q=${encodeURIComponent(searchValue)}`);
@@ -114,8 +112,6 @@ export default function Home({ products }: HomePageProps) {
     setInputSearchValue(value);
     handleSearch(value);
   };
-
-  console.log(page);
 
   return (
     <Container>
