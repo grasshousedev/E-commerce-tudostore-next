@@ -50,6 +50,24 @@ export const ContainerBagItem = styled.div`
   }
 
   .left-container {
+    width: 30%;
+    max-height: 210px;
+    max-width: 200px;
+
+    @media screen and (max-width: 536px) {
+      width: 50%;
+    }
+
+    @media screen and (max-width: 430px) {
+      width: 65%;
+    }
+
+    @media screen and (max-width: 346px) {
+      width: 100%;
+      max-width: unset;
+      max-height: unset;
+    }
+
     img {
       height: 100%;
       min-width: 200px;
@@ -57,7 +75,7 @@ export const ContainerBagItem = styled.div`
       object-fit: contain;
 
       @media screen and (max-width: 1026px) {
-        min-width: 100px;
+        min-width: 120px;
       }
 
       @media screen and (max-width: 536px) {
