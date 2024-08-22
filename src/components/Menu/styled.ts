@@ -42,6 +42,10 @@ export const Container = styled.div`
       width: 107%;
       height: 107%;
     }
+
+    span {
+      display: none;
+    }
   }
 
   nav {
@@ -62,10 +66,17 @@ export const Container = styled.div`
     bottom: 1rem;
     position: fixed;
     box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
-    padding-bottom: 1.6rem;
+    /* padding-bottom: 1.6rem; */
 
     @media screen and (max-width: 500px) {
       height: calc(61.6406px + 1rem);
+    }
+
+    @media screen and (max-width: 330px) {
+      height: fit-content;
+      width: fit-content;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     nav {
@@ -73,8 +84,19 @@ export const Container = styled.div`
       justify-content: space-between;
       width: 100%;
 
-      @media screen and (max-width: 326px) {
-        gap: 1.2rem;
+      @media screen and (max-width: 426px) {
+        gap: 0.7rem;
+      }
+
+      @media screen and (max-width: 350px) {
+        gap: 0.3rem;
+      }
+
+      @media screen and (max-width: 330px) {
+        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
       }
 
       a.profile-link {
@@ -83,15 +105,31 @@ export const Container = styled.div`
 
       a {
         max-width: 70px;
+        display: flex;
+        flex-direction: column;
 
         img {
           width: 30px;
           height: 30px;
         }
+
+        span {
+          display: block;
+          white-space: nowrap;
+
+          ${({ theme }) => css`
+            font-size: ${theme.fontSizes.small};
+            color: inherit;
+          `}
+        }
       }
     }
 
-    a.page-link {
+    a.profile-link {
+      display: none;
+    }
+
+    /* a.page-link {
       position: relative;
     }
 
@@ -123,9 +161,9 @@ export const Container = styled.div`
       white-space: nowrap;
 
       ${({ theme }) => css`
-        font-size: ${theme.fontSizes.small};
-        color: ${theme.colors.dark};
-      `}
-    }
+      font-size: ${theme.fontSizes.small};
+      color: ${theme.colors.dark};
+    `}
+    } */
   }
 `;

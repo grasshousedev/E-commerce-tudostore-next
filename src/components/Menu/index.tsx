@@ -20,15 +20,19 @@ export default function Menu() {
         <nav>
           <Link className="page-link home-redirect logo" href="/">
             <Image src={logo} alt="Logo da página" />
+            <span>Tudo Store</span>
           </Link>
-          <Link href="/" className={`page-link home-link ${pathname === '/' ? 'in' : ''}`}>
+          <Link href="/" className={`page-link ${pathname === '/' ? 'in' : ''}`}>
             <IoStorefront />
+            <span>Produtos</span>
           </Link>
-          <Link href="/bag" className={`page-link bag-link ${pathname === '/bag' ? 'in' : ''}`}>
+          <Link href="/bag" className={`page-link ${pathname === '/bag' ? 'in' : ''}`}>
             <IoBagHandle />
+            <span>Bolsa</span>
           </Link>
           <Link href="/profile" className={`page-link profile-link ${pathname === '/profile' ? 'in' : ''}`}>
             <IoPerson />
+            <span>Perfil</span>
           </Link>
         </nav>
         <div className="me">
