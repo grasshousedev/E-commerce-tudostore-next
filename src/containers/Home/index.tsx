@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-
+import { useState, useEffect, useRef, ChangeEvent, useCallback } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 import { IoSearch } from 'react-icons/io5';
 
 import { paginationLimits } from '../../config/limits';
 
 import { getAllProducts } from '../../data/products/getAll';
+import { searchProducts } from '../../data/products/search';
 
 import { useUserScrolled } from '../../hooks/userScrolled';
 
@@ -25,13 +26,24 @@ export default function Home({ products }: HomePageProps) {
   const [productsData, setProductsData] = useState(products);
   const [page, setPage] = useState(1);
   const [isLoadingMoreProducts, setIsLoadingMoreProducts] = useState(false);
+  const [inputSearchValue, setInputSearchValue] = useState('');
   const debounceTimeoutRef = useRef(null);
 
-  const loadMoreProducts = async () => {
+  const isNotPossibleToLoadMore = productsData.products.length >= productsData.total;
+
+  const loadMoreProducts = useCallback(async () => {
+    if (isNotPossibleToLoadMore) return;
     setIsLoadingMoreProducts(true);
-    const moreProducts = await getAllProducts(
-      `skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
-    );
+    let moreProducts: ProductsProtocol; // < usar Promise<>
+    if (inputSearchValue) {
+      moreProducts = await searchProducts(
+        `q=${inputSearchValue}&skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
+      );
+    } else {
+      moreProducts = await getAllProducts(
+        `skip=${page * paginationLimits.homeProducts}&limit=${paginationLimits.homeProducts}`,
+      );
+    }
     const newObjProducts = {
       products: [...productsData.products, ...moreProducts.products],
       total: moreProducts.total,
@@ -41,7 +53,8 @@ export default function Home({ products }: HomePageProps) {
     setProductsData(newObjProducts);
     setPage(page + 1);
     setIsLoadingMoreProducts(false);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputSearchValue, page, productsData.products]);
 
   useEffect(() => {
     const handleScrollLoadMore = () => {
@@ -64,8 +77,12 @@ export default function Home({ products }: HomePageProps) {
         clearTimeout(debounceTimeoutRef.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingMoreProducts]);
+  }, [isLoadingMoreProducts, loadMoreProducts]);
+
+  const handleSearch = useDebouncedCallback(async (searchValue?: string) => {
+    const searchResult = await searchProducts(`q=${encodeURIComponent(searchValue)}`);
+    setProductsData(searchResult);
+  }, 300);
 
   const handleActiveInputSearch = () => {
     setInputFocused(true);
@@ -74,6 +91,15 @@ export default function Home({ products }: HomePageProps) {
   const handleDeactivateInputSearch = () => {
     setInputFocused(false);
   };
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.length > 146) return;
+    setInputSearchValue(value);
+    handleSearch(value);
+  };
+
+  console.log(productsData);
 
   return (
     <Container>
@@ -85,6 +111,8 @@ export default function Home({ products }: HomePageProps) {
           placeholder={`${inputFocused || !userScrolled ? 'Camiseta, Blusas, Moleton, Notebooks, Celulares, ...' : ''}`}
           onFocus={handleActiveInputSearch}
           onBlur={handleDeactivateInputSearch}
+          value={inputSearchValue}
+          onChange={handleChangeInput}
         />
         {userScrolled && !inputFocused && (
           <label className="input-search-label" htmlFor="input-search">
@@ -94,7 +122,7 @@ export default function Home({ products }: HomePageProps) {
       </SearchBar>
       <Products products={productsData} />
       {isLoadingMoreProducts && <LoadingMoreProducts />}
-      {!isLoadingMoreProducts && productsData.products.length < products.total && (
+      {!isLoadingMoreProducts && !isNotPossibleToLoadMore && (
         <button className="btn-load-more" type="button" onClick={loadMoreProducts}>
           Carregar mais
         </button>

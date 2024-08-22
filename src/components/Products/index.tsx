@@ -11,9 +11,9 @@ export type ProductsProps = {
 export default function Products({ products }: ProductsProps) {
   return (
     <Container>
-      {products.products.map((product) => (
+      {products.products.map((product, i) => (
         <Product
-          key={product.id}
+          key={i}
           id={product.id}
           thumbnail={product.thumbnail}
           title={product.title}
