@@ -27,6 +27,25 @@ export const ContainerBagItems = styled.div`
       margin-top: 0.5rem;
     }
   }
+
+  &.sm-screen-column {
+    & > div {
+      @media screen and (max-width: 500px) {
+        flex-direction: column;
+
+        .left-container {
+          width: 100%;
+          max-width: unset;
+          max-height: 200px;
+
+          img {
+            max-height: 200px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 `;
 
 export const ContainerBagItem = styled.div`

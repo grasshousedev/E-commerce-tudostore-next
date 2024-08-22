@@ -150,7 +150,7 @@ export default function Checkout() {
               <header>
                 <h1 className="title-all-uppercase-spaced">Reveja sua bolsa</h1>
               </header>
-              <BagItems className="m-top-1 border-divisor" />
+              <BagItems className="m-top-1 border-divisor sm-screen-column" />
             </Card>
           </section>
           <section className="right-content">

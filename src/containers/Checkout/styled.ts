@@ -4,10 +4,14 @@ export const Container = styled.main`
   margin-inline: auto;
   margin-bottom: 2rem;
   width: 100%;
-
   display: flex;
   gap: 6.375rem;
   justify-content: center;
+
+  @media screen and (max-width: 912px) {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
 
   section.left-container {
     display: flex;
@@ -18,9 +22,21 @@ export const Container = styled.main`
   }
 
   section.right-content {
-    button {
+    @media screen and (max-width: 912px) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    & > button {
       margin-left: auto;
       margin-top: 1.563rem;
+
+      @media screen and (max-width: 912px) {
+        margin-top: unset;
+        margin-left: unset;
+        margin-bottom: 1.563rem;
+        margin-right: auto;
+      }
     }
   }
 `;
@@ -30,6 +46,12 @@ export const ContainerResume = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 0.8rem;
   min-width: 218px;
+
+  @media screen and (max-width: 912px) {
+    button {
+      width: 100%;
+    }
+  }
 
   header {
     h1 {
