@@ -12,6 +12,7 @@ import { ContainerBagItems, ContainerBagItem, BagItemAnimated, ContainerEmpty } 
 
 export type BagItemsProps = {
   className?: string;
+  emptyClassName?: string;
 };
 
 const BagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItemDataProtocol) => {
@@ -74,7 +75,7 @@ const BagItem = ({ id, repeat, thumbnail, title, rating, brand, price }: BagItem
   );
 };
 
-export default function BagItems({ className }: BagItemsProps) {
+export default function BagItems({ className, emptyClassName }: BagItemsProps) {
   const { bagItems, bagData, LSLoaded } = useBagContext();
 
   return (
@@ -97,7 +98,7 @@ export default function BagItems({ className }: BagItemsProps) {
           bagItems.map((_, i) => <BagItemAnimated key={i} className="load-animation" />)}
       </ContainerBagItems>
       {LSLoaded && bagItems.length === 0 && (
-        <ContainerEmpty>
+        <ContainerEmpty className={emptyClassName}>
           <h2>Parece que sua bolsa está vázia</h2>
           <p>
             Adicione produtos ao seu carrinho para começar a comprar e visualizar as suas compras futuras.

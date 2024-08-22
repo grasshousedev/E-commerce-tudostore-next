@@ -56,7 +56,10 @@ export default function Product({ product }: ProductPageProps) {
       <Link
         className={`back-link ${userScrolled ? 'float-style' : ''}`}
         href="#"
-        onClick={() => history.back()}
+        onClick={(e) => {
+          e.preventDefault();
+          history.back();
+        }}
       >
         <IoIosArrowBack />
         <span>Voltar</span>

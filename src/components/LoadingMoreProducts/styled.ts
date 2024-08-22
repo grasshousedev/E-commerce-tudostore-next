@@ -17,6 +17,10 @@ export const Container = styled.div`
   bottom: 0rem;
   transform: translateX(-50%);
 
+  @media screen and (max-width: 536px) {
+    width: 45px;
+  }
+
   @keyframes showUp {
     to {
       bottom: 4rem;

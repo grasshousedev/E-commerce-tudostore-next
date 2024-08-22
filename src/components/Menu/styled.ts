@@ -92,12 +92,12 @@ export const Container = styled.div`
         gap: 0.3rem;
       }
 
-      @media screen and (max-width: 330px) {
+      /* @media screen and (max-width: 330px) {
         flex-wrap: wrap;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
-      }
+      } */
 
       a.profile-link {
         display: flex;

@@ -90,6 +90,10 @@ export const SearchBar = styled.div`
     }
     box-shadow: 0 0 16px ${({ theme }) => theme.colors.placeholder}26;
     transition: margin-top 0.2s;
+
+    @media screen and (max-width: 536px) {
+      font-size: ${({ theme }) => theme.fontSizes.base};
+    }
   }
 
   .input-search-label {

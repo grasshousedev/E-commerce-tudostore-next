@@ -14,6 +14,16 @@ export const Container = styled.main`
     `}
     font-weight: 400;
   }
+
+  & > div.empty {
+    height: 78vh;
+    height: 78svh;
+    width: 100%;
+
+    a {
+      white-space: nowrap;
+    }
+  }
 `;
 
 export const ContainerSmallScreenResume = styled.section`
