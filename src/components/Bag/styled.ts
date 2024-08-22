@@ -13,11 +13,9 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
 
-  // queries
   @media screen and (max-width: 963px) {
     display: none;
   }
-  //
 
   &:before {
     content: '';

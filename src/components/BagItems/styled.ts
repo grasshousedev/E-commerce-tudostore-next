@@ -56,7 +56,7 @@ export const ContainerBagItem = styled.div`
       width: 100%;
       object-fit: contain;
 
-      @media screen and (max-width: 963px) {
+      @media screen and (max-width: 1026px) {
         min-width: 100px;
       }
 
