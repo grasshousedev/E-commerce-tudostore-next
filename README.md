@@ -4,7 +4,7 @@ Projeto de E-commerce com TypeScript e Next.Js, requisitando dados da API [Dummy
 
 **Acesse o projeto aqui**: https://ecommerce-tudostore.vercel.app
 
-![Tudo Store](GIF)
+![Tudo Store](https://github.com/gabriel-tomas/ecommerce-tudostore/blob/main/public/tudo-store.gif?raw=true)
 
 ## Tecnologias utilizadas
 
