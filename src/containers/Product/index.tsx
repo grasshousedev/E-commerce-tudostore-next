@@ -8,6 +8,7 @@ import { useBagContext } from '../../contexts/bag';
 
 import { useWaitImageLoad } from '../../hooks/waitImageLoad';
 import { useUserScrolled } from '../../hooks/userScrolled';
+import { checkSmallScrenAndShowMsg, useSmallScreenToastMsg } from '../../hooks/smallScreenToastMsg';
 
 import { convertToBRL } from '../../utils/convertPriceBRL';
 import { getRatingStars } from '../../utils/convertRatingToStars';
@@ -25,10 +26,12 @@ export type ProductPageProps = {
 };
 
 export default function Product({ product }: ProductPageProps) {
-  const [selectedImg, setSelectedImg] = useState(product.images[0]);
   const { bagItems, setBagItems } = useBagContext();
   const { userScrolled } = useUserScrolled();
   const { imagesLoaded } = useWaitImageLoad(product.images);
+  const { isSmallScreen } = useSmallScreenToastMsg();
+
+  const [selectedImg, setSelectedImg] = useState(product.images[0]);
 
   const handleSelectImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedImg(e.target.value);
@@ -46,9 +49,11 @@ export default function Product({ product }: ProductPageProps) {
     });
     if (itemFinded) {
       setBagItems(bagItemModified);
+      checkSmallScrenAndShowMsg(isSmallScreen, thumbnail, 'Item adicionado');
       return;
     }
     setBagItems([...bagItems, { id, title, repeat: 1, thumbnail }]);
+    checkSmallScrenAndShowMsg(isSmallScreen, thumbnail, 'Novo item adicionado');
   };
 
   return (

@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-
 import { IoBagAdd } from 'react-icons/io5';
 
 import { useBagContext } from '../../../contexts/bag';
+
+import { checkSmallScrenAndShowMsg, useSmallScreenToastMsg } from '../../../hooks/smallScreenToastMsg';
 
 import { convertToBRL } from '../../../utils/convertPriceBRL';
 
@@ -15,8 +16,10 @@ import { Container, ContainerImg, ContainerInfo } from './styled';
 export type ProductProps = ProductMinimalProtocol;
 
 export default function Product({ id, thumbnail, title, brand, price }: ProductProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const { bagItems, setBagItems } = useBagContext();
+  const { isSmallScreen } = useSmallScreenToastMsg();
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleAddToBag = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -31,9 +34,11 @@ export default function Product({ id, thumbnail, title, brand, price }: ProductP
     });
     if (itemFinded) {
       setBagItems(bagItemModified);
+      checkSmallScrenAndShowMsg(isSmallScreen, thumbnail, 'Item adicionado');
       return;
     }
     setBagItems([...bagItems, { id, title, repeat: 1, thumbnail }]);
+    checkSmallScrenAndShowMsg(isSmallScreen, thumbnail, 'Novo item adicionado');
   };
 
   return (
