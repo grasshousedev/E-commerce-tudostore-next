@@ -99,8 +99,6 @@ export default function Home({ products }: HomePageProps) {
     handleSearch(value);
   };
 
-  console.log(productsData);
-
   return (
     <Container>
       <SearchBar className={`${userScrolled ? 'off' : ''} ${inputFocused ? 'focused' : ''}`}>
@@ -108,7 +106,7 @@ export default function Home({ products }: HomePageProps) {
         <input
           id="input-search"
           type="text"
-          placeholder={`${inputFocused || !userScrolled ? 'Camiseta, Blusas, Moleton, Notebooks, Celulares, ...' : ''}`}
+          placeholder={`${inputFocused || !userScrolled ? 'Macbook, Smartphone, Shirt, Food, Phone, ...' : ''}`}
           onFocus={handleActiveInputSearch}
           onBlur={handleDeactivateInputSearch}
           value={inputSearchValue}
