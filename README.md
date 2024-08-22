@@ -18,6 +18,8 @@ Clone o repositório:
 ```shell
 git clone https://github.com/gabriel-tomas/ecommerce-tudostore.git
 ```
+Vá até a pasta onde ele foi clonado
+
 Instale os pacotes:
 ```shell
 npm i
